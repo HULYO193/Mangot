@@ -17,8 +17,6 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         Post pst = new Post();
         pst.setUserName(mAuth.getCurrentUser().getEmail());
-
-
     }
 
 
