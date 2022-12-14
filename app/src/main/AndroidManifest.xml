@@ -14,7 +14,7 @@
         android:theme="@style/Theme.Mangot"
         tools:targetApi="31">
         <activity
-            android:name=".MainScreen"
+            android:name=".FirebaseDataStorage"
             android:exported="false" />
         <activity
             android:name=".Login"
