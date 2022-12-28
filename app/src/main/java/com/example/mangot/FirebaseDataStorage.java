@@ -18,6 +18,12 @@ import com.google.firebase.firestore.FirebaseFirestore;
 public class FirebaseDataStorage extends AppCompatActivity {
 
 
+
+    // 1. pass the manga name via intent
+    // 2 diplay mange name in text view
+    // 3. after files where chosen
+    //      a. upload the images for this chapter for the firebase storage
+    //      b. update number of chapters in the firebase database document-  for this mange -chapter counter
     private static final int REQUEST_CODE_FOR_ON_ACTIVITY_RESULT =1 ;
     FirebaseFirestore  db = FirebaseFirestore.getInstance();
     private static final String TAG = "MainActivity";
@@ -46,7 +52,6 @@ public class FirebaseDataStorage extends AppCompatActivity {
         filesIntent.putExtra(Intent.EXTRA_ALLOW_MULTIPLE, true);
         filesIntent.addCategory(Intent.CATEGORY_OPENABLE);
         filesIntent.setType("image/*");  //use image/* for photos, etc.
-        startActivityForResult(filesIntent, 1001);
         startActivityForResult(filesIntent, REQUEST_CODE_FOR_ON_ACTIVITY_RESULT);
 
     }
@@ -56,9 +61,11 @@ public class FirebaseDataStorage extends AppCompatActivity {
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
 
+        Toast.makeText(this, "files returned",Toast.LENGTH_SHORT).show();
+
         if (resultCode == RESULT_OK) {
             switch (requestCode) {
-                case 1001:
+                case REQUEST_CODE_FOR_ON_ACTIVITY_RESULT:
 
                     // Checking whether data is null or not
                     if (data != null) {
