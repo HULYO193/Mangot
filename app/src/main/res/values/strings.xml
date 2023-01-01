@@ -1,4 +1,7 @@
 <resources>
     <string name="app_name">Mangot</string>
     <string name="button">Button</string>
+    <string name="add_chapter">ADD CHAPTER</string>
+    <string name="manga_name">MangaName</string>
+    <string name="manga_cover">MangaCover</string>
 </resources>

@@ -5,12 +5,12 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.net.Uri;
-import android.nfc.Tag;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.firebase.firestore.FirebaseFirestore;
@@ -31,10 +31,18 @@ public class FirebaseDataStorage extends AppCompatActivity {
     private static final String KEY_DESCRIPTION = "description";
     EditText editTextTitle;
     EditText editTextDescription;
+    private String mangaName;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_firebasedatastorage);
+
+        mangaName = getIntent().getStringExtra("MangaName");
+        TextView mName = findViewById(R.id.tvMangaName);
+        mName.setText(mangaName);
+
+
         editTextTitle = findViewById(R.id.edit_text_title);
         editTextDescription = findViewById(R.id.edit_text_description);
     }
