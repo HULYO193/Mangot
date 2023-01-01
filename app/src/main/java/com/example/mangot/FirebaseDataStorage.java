@@ -61,6 +61,7 @@ public class FirebaseDataStorage extends AppCompatActivity {
         filesIntent.addCategory(Intent.CATEGORY_OPENABLE);
         filesIntent.setType("image/*");  //use image/* for photos, etc.
         startActivityForResult(filesIntent, REQUEST_CODE_FOR_ON_ACTIVITY_RESULT);
+        //fsd
 
     }
 
