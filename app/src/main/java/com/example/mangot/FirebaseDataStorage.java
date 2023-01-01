@@ -62,10 +62,10 @@ public class FirebaseDataStorage extends AppCompatActivity {
         filesIntent.setType("image/*");  //use image/* for photos, etc.
         startActivityForResult(filesIntent, REQUEST_CODE_FOR_ON_ACTIVITY_RESULT);
         //fsd
-
+//asd
     }
 
-
+//sadf
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
