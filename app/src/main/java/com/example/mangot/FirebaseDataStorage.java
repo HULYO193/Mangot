@@ -18,7 +18,7 @@ import com.google.firebase.firestore.FirebaseFirestore;
 public class FirebaseDataStorage extends AppCompatActivity {
 
 
-
+//sdfs
     // 1. pass the manga name via intent
     // 2 diplay mange name in text view
     // 3. after files where chosen
