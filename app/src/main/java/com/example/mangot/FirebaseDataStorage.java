@@ -19,8 +19,8 @@ public class FirebaseDataStorage extends AppCompatActivity {
 
 
 //sdfs
-    // 1. pass the manga name via intent
-    // 2 diplay mange name in text view
+    // 1. pass the manga name via intent - check
+    // 2 diplay mange name in text view - check
     // 3. after files where chosen
     //      a. upload the images for this chapter for the firebase storage
     //      b. update number of chapters in the firebase database document-  for this mange -chapter counter
@@ -45,6 +45,7 @@ public class FirebaseDataStorage extends AppCompatActivity {
 
         editTextTitle = findViewById(R.id.edit_text_title);
         editTextDescription = findViewById(R.id.edit_text_description);
+        db.collection("collectionName").document("hello");
     }
 
     public void SaveNote(View view) {
@@ -61,11 +62,10 @@ public class FirebaseDataStorage extends AppCompatActivity {
         filesIntent.addCategory(Intent.CATEGORY_OPENABLE);
         filesIntent.setType("image/*");  //use image/* for photos, etc.
         startActivityForResult(filesIntent, REQUEST_CODE_FOR_ON_ACTIVITY_RESULT);
-        //fsd
-//asd
+
     }
 
-//sadf
+
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
