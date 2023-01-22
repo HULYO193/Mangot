@@ -71,7 +71,7 @@ public class FirebaseDataStorage extends AppCompatActivity {
         // upload the uri to firebase storage
 
         // for testing only!!!
-        mangaName = "test_manga";
+        mangaName = "test_manga";//
 
         for (int i=0;i<uriArr.size();i++) {
             Uri u = uriArr.get(i);
