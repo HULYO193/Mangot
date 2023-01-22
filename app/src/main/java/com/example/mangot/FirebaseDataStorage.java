@@ -84,7 +84,7 @@ public class FirebaseDataStorage extends AppCompatActivity {
                 StorageReference chapterReference = storageRef.child(pathName);
                 chapterReference.putFile(u);
 
-                // storage/manganame/title
+                // storage/manga_name/title
 
 
             }
