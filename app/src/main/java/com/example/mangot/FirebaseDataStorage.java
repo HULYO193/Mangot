@@ -14,6 +14,10 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
+
+import java.util.ArrayList;
 
 public class FirebaseDataStorage extends AppCompatActivity {
 
@@ -29,9 +33,12 @@ public class FirebaseDataStorage extends AppCompatActivity {
     private static final String TAG = "MainActivity";
     private static final String KEY_TITLE = "title";
     private static final String KEY_DESCRIPTION = "description";
+
+    private ArrayList<Uri> uriArr = new ArrayList<>();
     EditText editTextTitle;
     EditText editTextDescription;
     private String mangaName;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,15 +49,48 @@ public class FirebaseDataStorage extends AppCompatActivity {
         TextView mName = findViewById(R.id.tvMangaName);
         mName.setText(mangaName);
 
+        Button b = findViewById(R.id.button);
+
+        b.setClickable(false);
 
         editTextTitle = findViewById(R.id.edit_text_title);
         editTextDescription = findViewById(R.id.edit_text_description);
-        db.collection("collectionName").document("hello");
+       db.collection("collectionName").document("hello");
     }
 
     public void SaveNote(View view) {
         String title = editTextTitle.getText().toString();
         String description = editTextDescription.getText().toString();
+        FirebaseStorage storage = FirebaseStorage.getInstance();
+
+        // genberal reference to firebase storage
+        StorageReference storageRef = storage.getReference();
+
+        // loop over the array
+        // for each element -> get the Uri
+        // upload the uri to firebase storage
+
+        // for testing only!!!
+        mangaName = "test_manga";
+
+        for (int i=0;i<uriArr.size();i++) {
+            Uri u = uriArr.get(i);
+            if(u!=null)
+            {
+
+                String filename = "file"+i;
+                String pathName = mangaName + "/" + title +"/" + filename;
+                // upload to storage
+                StorageReference chapterReference = storageRef.child(pathName);
+                chapterReference.putFile(u);
+
+                // storage/manganame/title
+
+
+            }
+
+
+        }
 
 
     }
@@ -88,12 +128,15 @@ public class FirebaseDataStorage extends AppCompatActivity {
                                 // Getting the URIs of the selected files and logging them into logcat at debug level
                                 Uri uri = data.getClipData().getItemAt(index).getUri();
                                 Log.d("filesUri [" + uri + "] : ", String.valueOf(uri) );
+                                uriArr.add(uri);
                             }
                         }else{
 
                             // Getting the URI of the selected file and logging into logcat at debug level
                             Uri uri = data.getData();
                             Log.d("fileUri: ", String.valueOf(uri));
+                            uriArr.add(uri);
+
                         }
                         Button b = findViewById(R.id.button);
                         b.setClickable(true);

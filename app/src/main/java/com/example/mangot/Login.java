@@ -43,10 +43,11 @@ public class Login extends AppCompatActivity {
             mAuth.createUserWithEmailAndPassword(email, password)
                     .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
                         @Override
-                        public void onComplete(@NonNull Task<AuthResult> task) {
+                        public void onComplete(@NonNull Task< AuthResult> task) {
                             if (task.isSuccessful()) {
                                 // Sign in success, update UI with the signed-in user's information
                                 // move to user activity
+
                             } else {
                                 // If sign in fails, display a message to the user.
                                 Toast.makeText(Login.this,"failed " + task.getException(),Toast.LENGTH_LONG).show();
