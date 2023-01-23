@@ -4,4 +4,8 @@
     <string name="add_chapter">ADD CHAPTER</string>
     <string name="manga_name">MangaName</string>
     <string name="manga_cover">MangaCover</string>
+    <string name="CreateMnaga">Button</string>
+    <string name="createManga">createManga</string>
+    <string name="description">Description</string>
+    <string name="CreateManga" />
 </resources>

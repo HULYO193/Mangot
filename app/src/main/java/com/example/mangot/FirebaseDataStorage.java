@@ -54,13 +54,12 @@ public class FirebaseDataStorage extends AppCompatActivity {
         b.setClickable(false);
 
         editTextTitle = findViewById(R.id.edit_text_title);
-        editTextDescription = findViewById(R.id.edit_text_description);
        db.collection("collectionName").document("hello");
     }
 
     public void SaveNote(View view) {
         String title = editTextTitle.getText().toString();
-        String description = editTextDescription.getText().toString();
+
         FirebaseStorage storage = FirebaseStorage.getInstance();
 
         ///

@@ -4,12 +4,24 @@ public class Manga {
     /* can also be Manhua and Manhwa */
     String name;
     String group; /* translation group */
+    String description; // add description of the Manga
     int chapters;
 
     int rating; /* ---> 1-5 */
 
-    public Manga() {
+    public Manga(String name,String description) {
+        this.name = name;
+        this.group = "";
+        this.description = description;
+        chapters = 0;
+    }
 
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
     }
 
     public int getRating() {

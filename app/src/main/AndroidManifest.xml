@@ -14,7 +14,20 @@
         android:theme="@style/Theme.Mangot"
         tools:targetApi="31">
         <activity
-            android:name=".ManagaActivity"
+            android:name=".CreateMangaActivity"
+            android:exported="true">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name=".MangaActivity"
             android:exported="false">
             <meta-data
                 android:name="android.app.lib_name"
@@ -23,18 +36,14 @@
         <activity
             android:name=".FirebaseDataStorage"
             android:exported="true">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
 
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
         </activity>
         <activity
             android:name=".Login"
             android:exported="false" />
         <activity
             android:name=".MainActivity"
-            android:exported="true"></activity>
+            android:exported="true" />
     </application>
 
 </manifest>
