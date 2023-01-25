@@ -3,6 +3,7 @@ package com.example.mangot;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
@@ -24,7 +25,9 @@ public class Login extends AppCompatActivity {
         FirebaseUser fbUser = mAuth.getCurrentUser();
         if(fbUser!=null)
         {
-            // move to user activity
+            Intent npage = new Intent(this,DashboardActivity.class);
+            startActivity(npage);
+
         }
 
     }
@@ -36,7 +39,7 @@ public class Login extends AppCompatActivity {
         EditText confirmpassword = findViewById(R.id.editTextTextConfirmationPassword);
         String password = npassword.getText().toString();
         String passConfirm = confirmpassword.getText().toString();
-        if(npassword.equals(passConfirm))
+        if(password.equals(passConfirm))
         {
             String email = nemail.getText().toString();
 
@@ -46,7 +49,10 @@ public class Login extends AppCompatActivity {
                         public void onComplete(@NonNull Task< AuthResult> task) {
                             if (task.isSuccessful()) {
                                 // Sign in success, update UI with the signed-in user's information
+                                Intent npage = new Intent(Login.this,DashboardActivity.class);
+                                startActivity(npage);
                                 // move to user activity
+                                //Intent npage = new Intent(this,MainActivity.class);
 
                             } else {
                                 // If sign in fails, display a message to the user.
