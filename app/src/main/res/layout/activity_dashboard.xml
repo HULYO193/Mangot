@@ -13,6 +13,8 @@
         android:layout_marginStart="1dp"
         android:layout_marginTop="176dp"
         android:layout_marginEnd="1dp"
+        android:layout_marginBottom="87dp"
+        app:layout_constraintBottom_toTopOf="@+id/Dashboard"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
@@ -22,7 +24,24 @@
         android:id="@+id/Dashboard"
         android:layout_width="412dp"
         android:layout_height="356dp"
-        tools:layout_editor_absoluteX="1dp"
-        tools:layout_editor_absoluteY="287dp" />
+        android:layout_marginTop="87dp"
+        android:layout_marginBottom="88dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/status_spinner" />
+
+    <Button
+        android:id="@+id/mangapage"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="241dp"
+        android:layout_marginTop="40dp"
+        android:layout_marginEnd="76dp"
+        android:text="Button"
+        android:onClick="gotomangapage"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -20,8 +20,9 @@ public class MangaActivity extends AppCompatActivity {
 
         String manga_name = mangaName.toString();
 
-        Intent mangaintent = new Intent(this,FirebaseDataStorage.class);
+        Intent mangaintent = new Intent(this, AddChapterActivity.class);
         mangaintent.putExtra("MangaName",manga_name);
+        startActivity(mangaintent);
 
 
     }

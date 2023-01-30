@@ -19,8 +19,8 @@ import com.google.firebase.storage.StorageReference;
 
 import java.util.ArrayList;
 
-public class FirebaseDataStorage extends AppCompatActivity {
-
+public class AddChapterActivity extends AppCompatActivity {
+//FirebaseDataStorage changed into AddChapterActivity(as well the xml to addchapter)
 
 //sdfs
     // 1. pass the manga name via intent - check
@@ -43,7 +43,7 @@ public class FirebaseDataStorage extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_firebasedatastorage);
+        setContentView(R.layout.activity_addchapter);
 
         mangaName = getIntent().getStringExtra("MangaName");
         TextView mName = findViewById(R.id.tvMangaName);
@@ -57,6 +57,7 @@ public class FirebaseDataStorage extends AppCompatActivity {
        db.collection("collectionName").document("hello");
     }
 
+    //uplaoding the pictures of the chapter(any number>0) to storage and going back to MangaActivity
     public void SaveNote(View view) {
         String title = editTextTitle.getText().toString();
 
@@ -72,7 +73,7 @@ public class FirebaseDataStorage extends AppCompatActivity {
 
         // for testing only!!!
         mangaName = "test_manga";//
-
+        //the loop is the main factor of the activity-> uploading the pictures od the chapter
         for (int i=0;i<uriArr.size();i++) {
             Uri u = uriArr.get(i);
             if(u!=null)
@@ -91,7 +92,9 @@ public class FirebaseDataStorage extends AppCompatActivity {
 
 
         }
-
+        //after the loop is done we can go back to the last page
+        Intent backtomanga = new Intent(AddChapterActivity.this,MangaActivity.class);
+        startActivity(backtomanga);
 
     }
 

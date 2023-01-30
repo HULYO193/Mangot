@@ -1,0 +1,11 @@
+X -> Not solved
+C -> Half solved
+O -> Solved
+
+there are countless MangaActivity's, how can we be sure we are coming back to the exact MangaActivity when we are done adding the chapter
+(AddChapterActivity, Lines 95-97) - X
+
+(we talked about it but I need to understand it further) How do we keep track of every Dashboard to Every User - X
+
+I need a menu to the RecyclerView how Am I going to use a button without a java class to help it with the OnClick Activity?
+(xml -> dashboard_manga) - X

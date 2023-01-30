@@ -31,7 +31,7 @@ public class Login extends AppCompatActivity {
         }
 
     }
-
+    //
     public void onclicklogin(View view)
     {
         EditText nemail = findViewById(R.id.editTextTextEmailAddress);
