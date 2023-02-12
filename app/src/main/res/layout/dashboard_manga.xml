@@ -12,7 +12,7 @@
         android:hint="MangaName"
         android:text="MangaName"
         tools:layout_editor_absoluteX="16dp"
-        tools:layout_editor_absoluteY="63dp" />
+        tools:layout_editor_absoluteY="16dp" />
 
     <TextView
         android:id="@+id/status"
@@ -31,8 +31,9 @@
         android:hint="CurrChapter"
         android:text="CurrChapter"
         app:layout_constraintEnd_toStartOf="@+id/maxchapters"
+        app:layout_constraintHorizontal_bias="0.372"
         app:layout_constraintStart_toStartOf="parent"
-        tools:layout_editor_absoluteY="168dp" />
+        tools:layout_editor_absoluteY="116dp" />
 
     <TextView
         android:id="@+id/maxchapters"
@@ -41,24 +42,24 @@
         android:hint="MaxChapters"
         android:text="MaxChapters"
         tools:layout_editor_absoluteX="131dp"
-        tools:layout_editor_absoluteY="168dp" />
+        tools:layout_editor_absoluteY="116dp" />
 
     <View
         android:id="@+id/divider"
         android:layout_width="409dp"
         android:layout_height="1dp"
-        android:layout_marginBottom="16dp"
+        android:layout_marginBottom="60dp"
         android:background="?android:attr/listDivider"
         app:layout_constraintBottom_toTopOf="@+id/name_manga"
-        tools:layout_editor_absoluteX="1dp" />
+        tools:layout_editor_absoluteX="2dp" />
 
     <View
         android:id="@+id/divider2"
         android:layout_width="409dp"
         android:layout_height="1dp"
         android:background="?android:attr/listDivider"
-        tools:layout_editor_absoluteX="1dp"
-        tools:layout_editor_absoluteY="202dp" />
+        tools:layout_editor_absoluteX="2dp"
+        tools:layout_editor_absoluteY="172dp" />
 
     <Button
         android:id="@+id/button2"
@@ -68,6 +69,6 @@
         app:layout_constraintBottom_toTopOf="@+id/divider2"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/divider"
-        app:layout_constraintVertical_bias="1.0" />
+        app:layout_constraintVertical_bias="0.895" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

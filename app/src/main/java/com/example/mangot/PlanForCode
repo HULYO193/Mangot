@@ -1,0 +1,10 @@
+My work is all over the place so I need to  organize my work...
+what to work on first and then onto the next thing:
+1)create recycle view to dashboard(Only manga's name)
+2)create a class called "Manga status" that have : user name, Manga name, curr chapter, reading status( Reading , completed, dropped atc)
+1)Add manga to storage
+2)Add chapter under ,manga's name + all th surroundings(chapters + 1, refresh the manga's page , etc
+3)Link a DashBoard to a user
+4)link the Manga to the dashboard(and keep it there even when refreshed under the user)
+5)
+after everything is done in the code -> design the pages and I see fit
