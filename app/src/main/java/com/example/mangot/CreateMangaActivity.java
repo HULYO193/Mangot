@@ -49,7 +49,7 @@ public class CreateMangaActivity extends AppCompatActivity {
                     // check if we have data
                     if(task.getResult().size()==1)
                     {
-                        // probelm...
+                        // problem...
                         Toast.makeText(CreateMangaActivity.this,"EXISTS " ,Toast.LENGTH_LONG).show();
 
                     }

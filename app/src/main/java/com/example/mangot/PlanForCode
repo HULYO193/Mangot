@@ -1,10 +1,11 @@
 My work is all over the place so I need to  organize my work...
 what to work on first and then onto the next thing:
-1)create recycle view to dashboard(Only manga's name)
-2)create a class called "Manga status" that have : user name, Manga name, curr chapter, reading status( Reading , completed, dropped atc)
-1)Add manga to storage
-2)Add chapter under ,manga's name + all th surroundings(chapters + 1, refresh the manga's page , etc
-3)Link a DashBoard to a user
-4)link the Manga to the dashboard(and keep it there even when refreshed under the user)
-5)
+1)create recycle view to dashboard(Only manga's name) - <3
+2)create a class called "MangaStatus" that have : user name, Manga name, curr chapter, reading status( Reading , completed, dropped atc) - <3
+2.5) link MangaActivity with MangaStatus and link rge spinner with MangaStatus(String status)
+3)Add manga to storage
+4)Add chapter under ,manga's name + all the surroundings(chapters + 1, refresh the manga's page , etc
+5)Link a DashBoard to a user
+6)link the Manga to the dashboard(and keep it there even when refreshed under the user)
+7)
 after everything is done in the code -> design the pages and I see fit

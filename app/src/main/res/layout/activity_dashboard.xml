@@ -11,14 +11,14 @@
         android:layout_width="409dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="1dp"
-        android:layout_marginTop="176dp"
+        android:layout_marginTop="45dp"
         android:layout_marginEnd="1dp"
-        android:layout_marginBottom="87dp"
+        android:layout_marginBottom="109dp"
+        android:minHeight="48dp"
         app:layout_constraintBottom_toTopOf="@+id/Dashboard"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@+id/mangapage" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/Dashboard"
@@ -36,11 +36,12 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="241dp"
-        android:layout_marginTop="40dp"
+        android:layout_marginTop="44dp"
         android:layout_marginEnd="76dp"
-        android:text="Button"
         android:onClick="gotomangapage"
+        android:text="Button"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 

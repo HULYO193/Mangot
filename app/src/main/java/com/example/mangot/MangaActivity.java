@@ -18,7 +18,7 @@ public class MangaActivity extends AppCompatActivity {
     public void addChapters(View view) {
         TextView mangaName = findViewById(R.id.mangaName);
 
-        String manga_name = mangaName.toString();
+        String manga_name = mangaName.getText().toString();
 
         Intent mangaintent = new Intent(this, AddChapterActivity.class);
         mangaintent.putExtra("MangaName",manga_name);
