@@ -22,7 +22,7 @@ import java.util.ArrayList;
 public class AddChapterActivity extends AppCompatActivity {
 //FirebaseDataStorage changed into AddChapterActivity(as well the xml to addchapter)
 
-//sdfs
+
     // 1. pass the manga name via intent - check
     // 2 diplay mange name in text view - check
     // 3. after files where chosen

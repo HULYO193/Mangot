@@ -3,6 +3,7 @@ package com.example.mangot;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -31,7 +32,8 @@ public class MangaAdapter extends RecyclerView.Adapter<MangaAdapter.MangaViewHol
         holder.mangaTextView.setText(currMangaStatus.getMangaName());
         holder.statusTextView.setText(currMangaStatus.getStatus());
         holder.currChapterTextView.setText(""+currMangaStatus.getCurrChapter());
-        holder.maxChaptersTextView.setText("" +currMangaStatus.getMaxChapters());
+        holder.maxChaptersTextView.setText(""+currMangaStatus.getMaxChapters());
+
 
     }
 
@@ -46,12 +48,14 @@ public class MangaAdapter extends RecyclerView.Adapter<MangaAdapter.MangaViewHol
         public TextView statusTextView;
         public TextView currChapterTextView;
         public TextView maxChaptersTextView;
+        public Button optionsButton;
         public MangaViewHolder(@NonNull View itemView) {
             super(itemView);
             mangaTextView = itemView.findViewById(R.id.name_manga);
             statusTextView = itemView.findViewById(R.id.status);
             currChapterTextView = itemView.findViewById(R.id.currchapter);
             maxChaptersTextView = itemView.findViewById(R.id.maxchapters);
+
         }
     }
 }
