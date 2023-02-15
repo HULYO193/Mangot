@@ -27,10 +27,10 @@
         android:layout_marginStart="104dp"
         android:layout_marginTop="80dp"
         android:layout_marginEnd="104dp"
-        android:text="@string/add_chapter"
         android:onClick="addChapters"
+        android:text="@string/add_chapter"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/imageView2" />
 
@@ -52,7 +52,27 @@
     <androidx.recyclerview.widget.RecyclerView
         android:layout_width="409dp"
         android:layout_height="334dp"
-        tools:layout_editor_absoluteX="1dp"
-        tools:layout_editor_absoluteY="396dp" />
+        android:layout_marginStart="1dp"
+        android:layout_marginTop="1dp"
+        android:layout_marginEnd="1dp"
+        android:layout_marginBottom="1dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/addChapter" />
+
+    <Button
+        android:id="@+id/addToDashboard"
+        android:layout_width="205dp"
+        android:layout_height="50dp"
+        android:layout_marginStart="102dp"
+        android:layout_marginTop="17dp"
+        android:layout_marginEnd="104dp"
+        android:text="ADD TO DASHBOARD"
+        android:onClick="addToDashboard"
+        app:layout_constraintBottom_toTopOf="@+id/addChapter"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/mangaName" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

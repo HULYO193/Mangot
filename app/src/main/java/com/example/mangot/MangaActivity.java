@@ -26,4 +26,10 @@ public class MangaActivity extends AppCompatActivity {
 
 
     }
+
+    public void addToDashboard(View view)
+    {
+        //Intent to go to the dashboardActivity and put the Manga's data as an Intent.putExtra
+        //when we are in the DashboardActivity we will add the data as to the usersmangas(Arraylist<MangaStatus>)
+    }
 }
