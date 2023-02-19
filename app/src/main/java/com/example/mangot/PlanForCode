@@ -2,8 +2,7 @@ My work is all over the place so I need to  organize my work...
 what to work on first and then onto the next thing:
 1)create recycle view to dashboard(Only manga's name) - <3
 2)create a class called "MangaStatus" that have : user name, Manga name, curr chapter, reading status( Reading , completed, dropped atc) - <3
-2.1) link MangaActivity with MangaStatus and link the spinner with MangaStatus(String status)
-2.2)Make Collection + subcollections in FireBase
+2.1)Make Collection + subcollections in FireBase <3
 2.2) make a button to the adapter and give it a menu with a few options(mark as read,delete,edit{put the chap number the user read up to manually})
 3) let the user be able to click on the Manga's name in the recycleview and lead the user to the "MangaActivity" with the Manga's Data
 4)create an activity class called ReaderActivity, It lets the user read the chapter's images by ascending order(with fragments maybe?)

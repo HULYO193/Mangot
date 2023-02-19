@@ -30,7 +30,7 @@ public class DashboardActivity extends AppCompatActivity {
 
         recyclerView.setLayoutManager(layoutManager);
 
-        MangaAdapter mangaAdapter = new MangaAdapter(usersmangas);
+        MangaAdapter mangaAdapter = new MangaAdapter(usersmangas,this);
         recyclerView.setAdapter(mangaAdapter);
 
     }

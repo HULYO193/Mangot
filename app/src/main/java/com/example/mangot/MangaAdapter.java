@@ -1,5 +1,6 @@
 package com.example.mangot;
 
+import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,9 +14,11 @@ import java.util.ArrayList;
 
 public class MangaAdapter extends RecyclerView.Adapter<MangaAdapter.MangaViewHolder> {
     private ArrayList<MangaStatus> usersmangas;
+    private Context c;
 
-    public MangaAdapter(ArrayList<MangaStatus> usersmangas) {
+    public MangaAdapter(ArrayList<MangaStatus> usersmangas,Context c) {
         this.usersmangas = usersmangas;
+        this.c = c;
     }
 
     @NonNull
@@ -33,6 +36,20 @@ public class MangaAdapter extends RecyclerView.Adapter<MangaAdapter.MangaViewHol
         holder.statusTextView.setText(currMangaStatus.getStatus());
         holder.currChapterTextView.setText(""+currMangaStatus.getCurrChapter());
         holder.maxChaptersTextView.setText(""+currMangaStatus.getMaxChapters());
+        holder.optionsButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                // 1 - delete- longholdonclick
+                // 2 - change status
+                // 3 - current chapter
+
+                // show dialog
+            }
+        });
+
+
+
+
 
 
     }
@@ -55,6 +72,7 @@ public class MangaAdapter extends RecyclerView.Adapter<MangaAdapter.MangaViewHol
             statusTextView = itemView.findViewById(R.id.status);
             currChapterTextView = itemView.findViewById(R.id.currchapter);
             maxChaptersTextView = itemView.findViewById(R.id.maxchapters);
+            optionsButton = itemView.findViewById(R.id.optionsButton);
 
         }
     }
