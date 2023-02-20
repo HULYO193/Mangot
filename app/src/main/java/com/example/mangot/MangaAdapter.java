@@ -8,11 +8,12 @@ import android.widget.Button;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.fragment.app.FragmentManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
 
-public class MangaAdapter extends RecyclerView.Adapter<MangaAdapter.MangaViewHolder> {
+public class MangaAdapter extends RecyclerView.Adapter<MangaAdapter.MangaViewHolder> implements DashboardDialog.DashboardDialogListener {
     private ArrayList<MangaStatus> usersmangas;
     private Context c;
 
@@ -43,16 +44,20 @@ public class MangaAdapter extends RecyclerView.Adapter<MangaAdapter.MangaViewHol
                 // 2 - change status
                 // 3 - current chapter
 
-                // show dialog
+                // show dialog:
+                openDialog();
+
             }
         });
 
 
-
-
-
-
     }
+    public void openDialog() {
+        DashboardDialog dashboardDialog = new DashboardDialog();
+        dashboardDialog.show(((DashboardActivity)this.c).getSupportFragmentManager(),"dialog of dashboard");
+    }
+
+
 
     @Override
     public int getItemCount() {
@@ -75,5 +80,10 @@ public class MangaAdapter extends RecyclerView.Adapter<MangaAdapter.MangaViewHol
             optionsButton = itemView.findViewById(R.id.optionsButton);
 
         }
+    }
+
+    @Override
+    public void applyText(String username, String password) {
+        //will show on the dialog the context
     }
 }

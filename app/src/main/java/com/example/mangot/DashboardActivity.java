@@ -8,10 +8,11 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 
-public class DashboardActivity extends AppCompatActivity {
+public class DashboardActivity extends AppCompatActivity implements DashboardDialog.DashboardDialogListener {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,4 +44,8 @@ public class DashboardActivity extends AppCompatActivity {
         startActivity(npage);
     }
 
+    @Override
+    public void applyText(String username, String password) {
+        Toast.makeText(this,"clicked",Toast.LENGTH_LONG).show();
+    }
 }
