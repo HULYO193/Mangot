@@ -48,5 +48,6 @@ public class DashboardActivity extends AppCompatActivity implements DashboardDia
     public void applyText(String username, String password) {
         Toast.makeText(this,"clicked",Toast.LENGTH_LONG).show();
     }
+    //public void UpdateMangaStatus
 }
 //kjhgguyg

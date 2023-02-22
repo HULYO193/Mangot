@@ -45,15 +45,15 @@ public class MangaAdapter extends RecyclerView.Adapter<MangaAdapter.MangaViewHol
                 // 3 - current chapter
 
                 // show dialog:
-                openDialog();
+                openDialog(currMangaStatus.getMangaName(),currMangaStatus.getStatus(),currMangaStatus.getCurrChapter());
 
             }
         });
 
 
     }
-    public void openDialog() {
-        DashboardDialog dashboardDialog = new DashboardDialog();
+    public void openDialog(String mName,String mStatus,int mChapters) {
+        DashboardDialog dashboardDialog = new DashboardDialog(mName,mStatus,mChapters);
         dashboardDialog.show(((DashboardActivity)this.c).getSupportFragmentManager(),"dialog of dashboard");
     }
 
