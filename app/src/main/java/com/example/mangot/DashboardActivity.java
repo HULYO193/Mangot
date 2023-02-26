@@ -26,7 +26,7 @@ public class DashboardActivity extends AppCompatActivity implements DashboardDia
         usersmangas.add(new MangaStatus("dave",31,"reading"));
         usersmangas.add(new MangaStatus("solo leveling",11,"reading"));
 
-        RecyclerView recyclerView =findViewById(R.id.Dashboard);
+        RecyclerView recyclerView = findViewById(R.id.Dashboard);
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(this);
 
         recyclerView.setLayoutManager(layoutManager);

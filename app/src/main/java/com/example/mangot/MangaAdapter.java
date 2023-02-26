@@ -35,8 +35,8 @@ public class MangaAdapter extends RecyclerView.Adapter<MangaAdapter.MangaViewHol
         MangaStatus currMangaStatus = usersmangas.get(position);
         holder.mangaTextView.setText(currMangaStatus.getMangaName());
         holder.statusTextView.setText(currMangaStatus.getStatus());
-        holder.currChapterTextView.setText(""+currMangaStatus.getCurrChapter());
-        holder.maxChaptersTextView.setText(""+currMangaStatus.getMaxChapters());
+        holder.currChapterTextView.setText("chapter "+currMangaStatus.getCurrChapter());
+        holder.maxChaptersTextView.setText("chapter "+currMangaStatus.getMaxChapters());
         holder.optionsButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

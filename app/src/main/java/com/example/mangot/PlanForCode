@@ -18,3 +18,16 @@ Checking the codes to make improvments:
 4)link the Manga to the dashboard(and keep it there even when refreshed under the user)
 5)
 after everything is done in the code -> design the pages and I see fit
+
+
+
+FireBase ---
+FireStore -> 3 main collections - 1) Mangot- all the mangas in the storage (for search later on)
+                                  2) Users - all the users that logged in.
+                                  3) MangaStatus - 1 sub collection called userMangas - in the sub
+                                     collection there will be collection's of user's emails and there
+                                     will be all the manga's that the user have in the Dashboard.
+                                     db.collection("MangaStatus").document(""+mAuth.getCurrentUser().getEmail()).collection("userMangas")
+
+Storage -> gets all the manga's in the app  and create for every manga a folder for chapters.
+Every chapter that will be uploaded will get in it's own manga folder.

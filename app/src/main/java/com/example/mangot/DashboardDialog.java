@@ -17,6 +17,9 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatDialogFragment;
 
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.firestore.FirebaseFirestore;
+
 import java.util.ArrayList;
 
 public class DashboardDialog extends AppCompatDialogFragment  {
@@ -29,7 +32,8 @@ public class DashboardDialog extends AppCompatDialogFragment  {
     private int mChapters;
 
     private static final ArrayList<String> statusChoicesArr = new ArrayList<>();
-
+    FirebaseFirestore db = FirebaseFirestore.getInstance();
+    private FirebaseAuth mAuth =  FirebaseAuth.getInstance();
 
     public DashboardDialog(String mName,String mStatus,int mChapters){
         this.mName = mName;
@@ -75,6 +79,11 @@ public class DashboardDialog extends AppCompatDialogFragment  {
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
                 mStatus = statusChoicesArr.get(i);
+
+                db.collection("MangaStatus").document(""+mAuth.getCurrentUser().getEmail())
+                        .collection("userMangas")
+                        .document(""+mName)
+                        .update("status",mStatus);
 
             }
 

@@ -94,6 +94,7 @@ public class AddChapterActivity extends AppCompatActivity {
         }
         //after the loop is done we can go back to the last page
         Intent backtomanga = new Intent(AddChapterActivity.this,MangaActivity.class);
+        backtomanga.putExtra("chapter",title);
         startActivity(backtomanga);
 
     }
@@ -105,6 +106,7 @@ public class AddChapterActivity extends AppCompatActivity {
         filesIntent.addCategory(Intent.CATEGORY_OPENABLE);
         filesIntent.setType("image/*");  //use image/* for photos, etc.
         startActivityForResult(filesIntent, REQUEST_CODE_FOR_ON_ACTIVITY_RESULT);
+
 
     }
 
