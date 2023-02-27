@@ -6,8 +6,9 @@ public class Chapter {
     public Chapter(int chapternum) {
         this.chapternum = chapternum;
     }
-    public int getChapternum() {
-        return chapternum;
+    public String getChapternum() {
+        String chapstring = "" + chapternum;
+        return chapstring;
     }
 
     public void setChapternum(int chapternum) {

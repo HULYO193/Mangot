@@ -40,8 +40,8 @@ public class DashboardActivity extends AppCompatActivity implements DashboardDia
 
     public void gotomangapage(View view)
     {
-        Intent npage = new Intent(this,MangaActivity.class);
-        startActivity(npage);
+        Intent nextpage = new Intent(this,MangaActivity.class);
+        startActivity(nextpage);
     }
 
     @Override

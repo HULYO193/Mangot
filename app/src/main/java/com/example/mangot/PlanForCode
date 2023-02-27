@@ -4,7 +4,8 @@ what to work on first and then onto the next thing:
 2)create a class called "MangaStatus" that have : user name, Manga name, curr chapter, reading status( Reading , completed, dropped atc) - <3
 2.1)Make Collection + subcollections in FireBase <3
 2.2) make a button to the adapter and give it a menu with a few options(mark as read,delete,edit{put the chap number the user read up to manually})
-     + make a custom dialog for the button -
+     + make a custom dialog for the button - <3
+2.3) work on the add to dashboard(with all the thing the dashboard need to get[the manga data + make it a mangastatus so you can get it in the mangaadapter])
 3) let the user be able to click on the Manga's name in the recycleview and lead the user to the "MangaActivity" with the Manga's Data -
 4)create an activity class called ReaderActivity, It lets the user read the chapter's images by ascending order(with fragments maybe?)
 5)link the ReaderActivity  to the chapters in the MangaActivity(for every chapter it'll load the related images from the storage
@@ -16,7 +17,9 @@ Checking the codes to make improvments:
 2)Add chapter under ,manga's name + all the surroundings(chapters + 1, refresh the manga's page , etc)
 3)Link a DashBoard to a user
 4)link the Manga to the dashboard(and keep it there even when refreshed under the user)
-5)
+5)custom dialog(make another spinner and delete button)
+
+
 after everything is done in the code -> design the pages and I see fit
 
 
@@ -31,3 +34,10 @@ FireStore -> 3 main collections - 1) Mangot- all the mangas in the storage (for 
 
 Storage -> gets all the manga's in the app  and create for every manga a folder for chapters.
 Every chapter that will be uploaded will get in it's own manga folder.
+
+
+
+
+dates and chances -
+26/2/23 ->  keep working on chapterAdapter and finish it so you can finish working on the "addToDashboard" and the work on DashboardActivity;
+27/2/23 ->  keep working with the "PlanForCode"

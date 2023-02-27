@@ -99,11 +99,6 @@ public class DashboardDialog extends AppCompatDialogFragment  {
 
 
 
-
-
-
-
-
         return builder.create();
     }
 

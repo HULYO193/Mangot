@@ -22,14 +22,23 @@ public class MangaActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_managa);
         ArrayList<Chapter> chapters = new ArrayList<>();
-        int chapter = getIntent().getIntExtra("chapter",chapters.size() + 1);
-        Chapter chap = new Chapter(chapter);
-        chapters.add(chap);
+//        int chapter = getIntent().getIntExtra("chapter",chapters.size() + 1);
+//        Chapter chap = new Chapter(chapter);
+//        chapters.add(chap);
+        chapters.add(new Chapter(1));
+        chapters.add(new Chapter(2));
+        chapters.add(new Chapter(3));
+        chapters.add(new Chapter(4));
+        chapters.add(new Chapter(5));
 
         RecyclerView recyclerChapter = findViewById(R.id.recyclerchapters);
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(this);
         recyclerChapter.setLayoutManager(layoutManager);
-        //keep working on chapterAdapter and finish it so you can finish working on the "addToDashboard" and the work on DashboardActivity;
+
+        ChapterAdapter chapterAdapter = new ChapterAdapter(chapters);
+        recyclerChapter.setAdapter(chapterAdapter);
+
+
     }
 
     public void addChapters(View view) {
@@ -46,13 +55,15 @@ public class MangaActivity extends AppCompatActivity {
 
     public void addToDashboard(View view)
     {
+        //Intent to go to the dashboardActivity and put the Manga's data as an Intent.putExtra
+        //when we are in the DashboardActivity we will add the data as to the usersmangas(Arraylist<MangaStatus>)
+
         TextView mangaName = findViewById(R.id.mangaName);
 
         String manga_name = mangaName.getText().toString();
         //MangaStatus = new MangaStatus(manga_name,)
 
-        //Intent to go to the dashboardActivity and put the Manga's data as an Intent.putExtra
-        //when we are in the DashboardActivity we will add the data as to the usersmangas(Arraylist<MangaStatus>)
+
         //db.collection("MangaStatus").document(""+mAuth.getCurrentUser().getEmail())
         //        .collection("userMangas")
         //        .document(""+manga_name)

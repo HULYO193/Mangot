@@ -8,4 +8,5 @@
     <string name="createManga">createManga</string>
     <string name="description">Description</string>
     <string name="CreateManga" />
+    <string name="chapternumber">ChapterNumber</string>
 </resources>

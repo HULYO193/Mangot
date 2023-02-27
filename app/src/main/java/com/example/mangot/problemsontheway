@@ -1,15 +1,21 @@
 X -> Not solved
 C -> Half solved
 O -> Solved
+A -> Answer
 
 there are countless MangaActivity's, how can we be sure we are coming back to the exact MangaActivity when we are done adding the chapter
 (AddChapterActivity, Lines 95-97) - O
 A -> there is one MangaActivity that is getting the data on the manga and showing it of on the screen(different Mangas have different data
 but the MangaActivity remains the same)
 
-(we talked about it but I need to understand it further) How do we keep track of every Dashboard to Every User - X
-A ->
+(we talked about it but I need to understand it further) How do we keep track of every Dashboard to Every User - O
+A -> by getting the dashboard under the user's email in the firestore
 
 I need a menu to the RecyclerView how Am I going to use a button without a java class to help it with the OnClick Activity?
-(xml -> dashboard_manga) - X
+(xml -> dashboard_manga) - O
+A ->just make the button and add the onclicklistener in the adapter
+
+how do I put the newest chapter on the top of the recyclerView in the manga activity +
++ if the "currChapters" is lower than the "maxChapters" I need to put the manga in the top of the recyclerView in DashboardActivity
+( there can be multiple mangas in the same situation - X
 A ->
