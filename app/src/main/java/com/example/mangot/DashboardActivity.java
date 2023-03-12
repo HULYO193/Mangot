@@ -7,6 +7,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.sax.StartElementListener;
 import android.view.View;
 import android.widget.Toast;
 
@@ -47,6 +48,11 @@ public class DashboardActivity extends AppCompatActivity implements DashboardDia
     @Override
     public void applyText(String username, String password) {
         Toast.makeText(this,"clicked",Toast.LENGTH_LONG).show();
+    }
+
+    public void CreateManga(View view) {
+        Intent createManga = new Intent(this,CreateMangaActivity.class);
+        startActivity(createManga);
     }
     //public void UpdateMangaStatus
 }
