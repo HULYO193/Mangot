@@ -1,5 +1,6 @@
 package com.example.mangot;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -9,13 +10,20 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.TextView;
 
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
 
 import java.util.ArrayList;
 
 public class MangaActivity extends AppCompatActivity {
     FirebaseFirestore db = FirebaseFirestore.getInstance();
+    FirebaseStorage storage = FirebaseStorage.getInstance();
     private FirebaseAuth mAuth =  FirebaseAuth.getInstance();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -59,15 +67,26 @@ public class MangaActivity extends AppCompatActivity {
         //when we are in the DashboardActivity we will add the data as to the usersmangas(Arraylist<MangaStatus>)
 
         TextView mangaName = findViewById(R.id.mangaName);
-
+        RecyclerView recyclerChapter = findViewById(R.id.recyclerchapters);
         String manga_name = mangaName.getText().toString();
-        //MangaStatus = new MangaStatus(manga_name,)
+        //MangaStatus ms = new MangaStatus(manga_name,recyclerChapter.getScrollBarSize());
 
 
-        //db.collection("MangaStatus").document(""+mAuth.getCurrentUser().getEmail())
-        //        .collection("userMangas")
-        //        .document(""+manga_name)
+        db.collection("MangaStatus").document(""+mAuth.getCurrentUser().getEmail()).collection("userMangas").document(""+manga_name);
 
+       /* DocumentReference dr = db.collection("mangot").document(""+manga_name);
+        dr.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+            @Override
+            public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                DocumentSnapshot ds = task.getResult();
+                Manga c = ds.toObject(Manga.class);
+                int chapters = c.getChapters();
+            }
+        }); */
+        Intent todashboard = new Intent(this,DashboardActivity.class);
+        todashboard.putExtra("manga_name",mangaName.getText().toString());
+        todashboard.putExtra("max_chapters",100);
+        startActivity(todashboard);
 
     }
 }

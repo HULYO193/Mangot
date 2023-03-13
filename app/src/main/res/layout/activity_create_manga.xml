@@ -10,61 +10,55 @@
         android:id="@+id/etMangaName"
         android:layout_width="322dp"
         android:layout_height="49dp"
-        android:layout_marginStart="35dp"
-        android:layout_marginTop="154dp"
-        android:layout_marginEnd="54dp"
+        android:layout_marginStart="45dp"
+        android:layout_marginTop="120dp"
+        android:layout_marginEnd="45dp"
+        android:autofillHints=""
         android:ems="10"
+        android:hint="Manga's Name"
         android:inputType="textPersonName"
-        android:text="Manga's Name"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        android:autofillHints="" />
-
-    <EditText
-        android:id="@+id/etDescription"
-        android:layout_width="322dp"
-        android:layout_height="49dp"
-        android:layout_marginStart="35dp"
-        android:layout_marginTop="100dp"
-        android:layout_marginEnd="54dp"
-        android:ems="10"
-        android:inputType="textPersonName"
-        android:text="@string/description"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/etMangaName" />
-
-    <EditText
-        android:id="@+id/translationGroup"
-        android:layout_width="322dp"
-        android:layout_height="48dp"
-        android:layout_marginStart="35dp"
-        android:layout_marginTop="77dp"
-        android:layout_marginEnd="54dp"
-        android:ems="10"
-        android:inputType="textPersonName"
-        android:text="Translation Group"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/etDescription" />
+        app:layout_constraintTop_toTopOf="parent" />
 
     <Button
         android:id="@+id/createManga"
         android:layout_width="205dp"
-        android:layout_height="44dp"
-        android:layout_marginStart="155dp"
-        android:layout_marginTop="86dp"
-        android:layout_marginEnd="162dp"
-        android:layout_marginBottom="120dp"
+        android:layout_height="48dp"
+        android:layout_marginStart="103dp"
+        android:layout_marginEnd="103dp"
+        android:layout_marginBottom="116dp"
         android:onClick="CreateManga"
         android:text="Create Manga"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.481"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <ImageView
+        android:id="@+id/uploadFront"
+        android:layout_width="169dp"
+        android:layout_height="162dp"
+        android:layout_marginStart="121dp"
+        android:layout_marginTop="137dp"
+        android:layout_marginEnd="121dp"
+        android:layout_marginBottom="61dp"
+        android:onClick="uploadMangaFront"
+        app:layout_constraintBottom_toTopOf="@+id/createManga"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/translationGroup"
-        app:layout_constraintVertical_bias="0.0" />
+        app:layout_constraintTop_toBottomOf="@+id/etMangaName"
+        app:layout_constraintVertical_bias="0.0"
+        app:srcCompat="@android:drawable/ic_menu_upload" />
+
+    <TextView
+        android:id="@+id/mFront"
+        android:layout_width="411dp"
+        android:layout_height="63dp"
+        android:layout_marginTop="58dp"
+        android:text=" If you have a front of the manga/manhwa/manhua \n please upload it to the app!"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/etMangaName" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -16,12 +16,12 @@ public class MangaStatus {
     int maxChapters;
     String status;// reading/ plan to read/ dropped / completed.
 
-    public MangaStatus(String mangaName, int currChapter, String status) {
+    public MangaStatus(String mangaName, int maxChapters) {
         this.useremail = fbUser.getEmail() ;
         this.mangaName = mangaName;
-        this.currChapter = currChapter;
-        this.status = status;
-        this.maxChapters = 100;
+        this.currChapter = 0;
+        this.status = "Reading";
+        this.maxChapters = maxChapters;
     }
     public int getMaxChapters() {
         return maxChapters;

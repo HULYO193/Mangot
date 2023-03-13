@@ -63,7 +63,6 @@ public class AddChapterActivity extends AppCompatActivity {
 
         FirebaseStorage storage = FirebaseStorage.getInstance();
 
-        ///
         // genberal reference to firebase storage
         StorageReference storageRef = storage.getReference();
 
@@ -73,7 +72,7 @@ public class AddChapterActivity extends AppCompatActivity {
 
         // for testing only!!!
         mangaName = "test_manga";//
-        //the loop is the main factor of the activity-> uploading the pictures od the chapter
+        //the loop is the main factor of the activity-> uploading the pictures of the chapter
         for (int i=0;i<uriArr.size();i++) {
             Uri u = uriArr.get(i);
             if(u!=null)
@@ -86,10 +85,7 @@ public class AddChapterActivity extends AppCompatActivity {
                 chapterReference.putFile(u);
 
                 // storage/manganame/title
-
-
             }
-
 
         }
         //after the loop is done we can go back to the last page

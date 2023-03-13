@@ -11,21 +11,24 @@ import android.sax.StartElementListener;
 import android.view.View;
 import android.widget.Toast;
 
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.firestore.FirebaseFirestore;
+
 import java.util.ArrayList;
 
 public class DashboardActivity extends AppCompatActivity implements DashboardDialog.DashboardDialogListener {
-
+    private FirebaseAuth mAuth =  FirebaseAuth.getInstance();
+    FirebaseFirestore db = FirebaseFirestore.getInstance();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_dashboard);
+        int maxChapters = getIntent().getIntExtra("max_chapters",0);
+        String manganame = getIntent().getStringExtra("manga_name");
         ArrayList<MangaStatus> usersmangas = new ArrayList<MangaStatus>();
 
-        usersmangas.add(new MangaStatus("hello world",1,"reading"));
-        usersmangas.add(new MangaStatus("helloing",5,"reading"));
-        usersmangas.add(new MangaStatus("idk",19,"reading"));
-        usersmangas.add(new MangaStatus("dave",31,"reading"));
-        usersmangas.add(new MangaStatus("solo leveling",11,"reading"));
+
+        usersmangas.add(new MangaStatus(manganame,maxChapters));
 
         RecyclerView recyclerView = findViewById(R.id.Dashboard);
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(this);
@@ -36,6 +39,7 @@ public class DashboardActivity extends AppCompatActivity implements DashboardDia
         recyclerView.setAdapter(mangaAdapter);
 
     }
+
 
 
 
@@ -56,4 +60,3 @@ public class DashboardActivity extends AppCompatActivity implements DashboardDia
     }
     //public void UpdateMangaStatus
 }
-//kjhgguyg
