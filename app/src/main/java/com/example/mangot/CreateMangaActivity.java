@@ -32,6 +32,7 @@ public class CreateMangaActivity extends AppCompatActivity {
     StorageReference storageRef = storage.getReference();
 
     private ArrayList<Uri> uriArr = new ArrayList<>();
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -46,74 +47,69 @@ public class CreateMangaActivity extends AppCompatActivity {
         EditText manga_name = findViewById(R.id.etMangaName);
         String mangas_name = manga_name.getText().toString();
 
+
+
+
         // check if such a manga exists
 
         db.collection("mangot").whereEqualTo("name",mangas_name).limit(1).get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
             @Override
             public void onComplete(@NonNull Task<QuerySnapshot> task) {
-                if(task.isSuccessful())
-                {
+                if (task.isSuccessful()) {
                     // check if we have data
-                    if(task.getResult().size()==1)
-                    {
+                    if (task.getResult().size() == 1) {
                         // problem...
-                        Toast.makeText(CreateMangaActivity.this,"EXISTS " ,Toast.LENGTH_LONG).show();
+                        Toast.makeText(CreateMangaActivity.this, "EXISTS ", Toast.LENGTH_LONG).show();
 
-                    }
-                    else // no such exists
+                    } else // no such exists
                     {
-                        Manga manga = new Manga(mangas_name);
+                        boolean isPic = false;
 
-                        db.collection("mangot").add(manga).addOnCompleteListener(new OnCompleteListener<DocumentReference>() {
+                        if (uriArr.size() > 0) // if a file is chosen
+                        {
+                            Uri u = uriArr.get(0);
+                            isPic = true;
+
+                            String filename = "MangaFront";
+                            String title = "Front";
+                            String pathName = mangas_name + "/" + title + "/" + filename;
+                            // upload to storage
+                            StorageReference frontReference = storageRef.child(pathName);
+                            frontReference.putFile(u);
+                        }
+
+
+                        Manga manga = new Manga(mangas_name);
+                        manga.setHasMangaFront(isPic);
+
+
+                        db.collection("mangot").document("" + mangas_name).set(manga).addOnCompleteListener(new OnCompleteListener<Void>() {
                             @Override
-                            public void onComplete(@NonNull Task<DocumentReference> task) {
+                            public void onComplete(@NonNull Task<Void> task) {
                                 // if success -> go to Dashboard page
                                 // else -> problem ->
-                                if(task.isSuccessful()){
-                                    Intent gotodashboard = new Intent(CreateMangaActivity.this,DashboardActivity.class);
+                                if (task.isSuccessful()) {
+                                    Intent gotodashboard = new Intent(CreateMangaActivity.this, DashboardActivity.class);
                                     startActivity(gotodashboard);
-                                }
-                                else{
-                                    Toast.makeText(CreateMangaActivity.this,"failed " + task.getException(),Toast.LENGTH_LONG).show();
+                                } else {
+                                    Toast.makeText(CreateMangaActivity.this, "failed " + task.getException(), Toast.LENGTH_LONG).show();
                                 }
 
                             }
                         });
 
+
                     }
                 }
             }
         });
-
-
-
-        // loop over the array
-        // for each element -> get the Uri
-        // upload the uri to firebase storage
-
-        // for testing only!!!
-        //mangaName = "test_manga";//
-        //the loop is the main factor of the activity-> uploading the pictures of the Front
-                EditText Name  = findViewById(R.id.etMangaName);
-                String mangaName = Name.toString();
-                String filename = "MangaFront" ;
-                String title = "Front";
-                String pathName = mangaName + "/" + title + "/" + filename;
-                // upload to storage
-                StorageReference chapterReference = storageRef.child(pathName);
-                //chapterReference.putFile(u);
-
-                // storage/manganame/title
-
-
-
-
     }
+
 
     public void uploadMangaFront(View view) {
         Intent filesIntent;
         filesIntent = new Intent(Intent.ACTION_GET_CONTENT);
-        filesIntent.putExtra(Intent.EXTRA_ALLOW_MULTIPLE, true);
+        //filesIntent.putExtra(Intent.EXTRA_ALLOW_MULTIPLE, true);
         filesIntent.addCategory(Intent.CATEGORY_OPENABLE);
         filesIntent.setType("image/*");  //use image/* for photos, etc.
         startActivityForResult(filesIntent, REQUEST_CODE_FOR_ON_ACTIVITY_RESULT);

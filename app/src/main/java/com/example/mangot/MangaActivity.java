@@ -43,8 +43,10 @@ public class MangaActivity extends AppCompatActivity {
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(this);
         recyclerChapter.setLayoutManager(layoutManager);
 
+
         ChapterAdapter chapterAdapter = new ChapterAdapter(chapters);
         recyclerChapter.setAdapter(chapterAdapter);
+
 
 
     }
@@ -57,8 +59,6 @@ public class MangaActivity extends AppCompatActivity {
         Intent mangaintent = new Intent(this, AddChapterActivity.class);
         mangaintent.putExtra("MangaName",manga_name);
         startActivity(mangaintent);
-
-
     }
 
     public void addToDashboard(View view)
@@ -69,24 +69,24 @@ public class MangaActivity extends AppCompatActivity {
         TextView mangaName = findViewById(R.id.mangaName);
         RecyclerView recyclerChapter = findViewById(R.id.recyclerchapters);
         String manga_name = mangaName.getText().toString();
-        //MangaStatus ms = new MangaStatus(manga_name,recyclerChapter.getScrollBarSize());
-
+        //MangaStatus ms = new MangaStatus(manga_name,);
 
         db.collection("MangaStatus").document(""+mAuth.getCurrentUser().getEmail()).collection("userMangas").document(""+manga_name);
 
-       /* DocumentReference dr = db.collection("mangot").document(""+manga_name);
+       DocumentReference dr = db.collection("mangot").document(""+manga_name);
         dr.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
             @Override
             public void onComplete(@NonNull Task<DocumentSnapshot> task) {
                 DocumentSnapshot ds = task.getResult();
                 Manga c = ds.toObject(Manga.class);
-                int chapters = c.getChapters();
+                int chaptersnum = c.getChapters();
+                Intent todashboard = new Intent(MangaActivity.this,DashboardActivity.class);
+                todashboard.putExtra("manga_name",mangaName.getText().toString());
+                todashboard.putExtra("max_chapters",chaptersnum);
+                startActivity(todashboard);
             }
-        }); */
-        Intent todashboard = new Intent(this,DashboardActivity.class);
-        todashboard.putExtra("manga_name",mangaName.getText().toString());
-        todashboard.putExtra("max_chapters",100);
-        startActivity(todashboard);
+        });
+
 
     }
 }

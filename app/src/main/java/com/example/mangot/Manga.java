@@ -6,9 +6,11 @@ public class Manga {
     int chapters;
     boolean hasMangaFront;
 
+
     public Manga(String name) {
         this.name = name;
         chapters = 0;
+        this.hasMangaFront = false;
     }
 
     public int getChapters() {
@@ -26,4 +28,13 @@ public class Manga {
     public void setName(String name) {
         this.name = name;
     }
+
+    public boolean isHasMangaFront() {
+        return hasMangaFront;
+    }
+
+    public void setHasMangaFront(boolean hasMangaFront) {
+        this.hasMangaFront = hasMangaFront;
+    }
+
 }
