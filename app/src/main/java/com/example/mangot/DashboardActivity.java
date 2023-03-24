@@ -1,5 +1,6 @@
 package com.example.mangot;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.GridLayoutManager;
@@ -12,6 +13,8 @@ import android.sax.StartElementListener;
 import android.view.View;
 import android.widget.Toast;
 
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.EventListener;
@@ -31,46 +34,64 @@ public class DashboardActivity extends AppCompatActivity implements DashboardDia
         int maxChapters = getIntent().getIntExtra("max_chapters",0);
         String manganame = getIntent().getStringExtra("manga_name");
 
-
-        getDataFromFirebase(maxChapters,manganame);
-
-
+        getDataFromFirebase();
     }
         // get all the documents
         // + the newely added one(From addToDashboard) in the Usermangas and put them in the array list for the recyclerview;
-    private void getDataFromFirebase(int maxChapters,String manganame) {
+    private void getDataFromFirebase() {
 
-        db.collection("MangaStatus").document(""+mAuth.getCurrentUser()
-                .getEmail()).collection("userMangas").add(new EventListener<QuerySnapshot>() {
+        RecyclerView recyclerView = findViewById(R.id.Dashboard);
+
+        ArrayList<MangaStatus> usersmangas = new ArrayList<MangaStatus>();
+
+        db.collection("MangaStatus").document(""+mAuth.getCurrentUser().getEmail()).collection("userMangas").get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                    @Override
+                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
+
+                        if(task.isSuccessful())
+                        {
+                            ArrayList<MangaStatus> lowPriority = new ArrayList<>();
+                            for (DocumentSnapshot doc: task.getResult())
+
+                            {
+                                MangaStatus ms =doc.toObject(MangaStatus.class);
+                                if(ms.getCurrChapter()==ms.getMaxChapters())
+                                    lowPriority.add(ms);
+                                else
+                                    usersmangas.add(ms);
+                            }
+
+                            usersmangas.addAll(lowPriority);
+                            RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(DashboardActivity.this);
+
+                            recyclerView.setLayoutManager(layoutManager);
+
+                            MangaAdapter mangaAdapter = new MangaAdapter(usersmangas,DashboardActivity.this);
+                            recyclerView.setAdapter(mangaAdapter);
+
+                        }
+
+                    }
+                });
+/*
+                .add(new EventListener<QuerySnapshot>() {
             @Override
             public void onEvent(@Nullable QuerySnapshot queryDocumentSnapshots, @Nullable FirebaseFirestoreException e) {
                 for (DocumentSnapshot doc: queryDocumentSnapshots)
-
                 {
-                    doc.toObject(MangaStatus.class);
-
-
+                    usersmangas.add(doc.toObject(MangaStatus.class));
                 }
 
             }
-        });
-        ArrayList<MangaStatus> usersmangas = new ArrayList<MangaStatus>();
 
+        }); */
 
-        usersmangas.add(new MangaStatus(manganame,maxChapters));
-
-        RecyclerView recyclerView = findViewById(R.id.Dashboard);
-        RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(this);
-
-        recyclerView.setLayoutManager(layoutManager);
-
-        MangaAdapter mangaAdapter = new MangaAdapter(usersmangas,this);
-        recyclerView.setAdapter(mangaAdapter);
     }
 
 
     public void gotomangapage(View view)
     {
+
         Intent nextpage = new Intent(this,MangaActivity.class);
         startActivity(nextpage);
     }

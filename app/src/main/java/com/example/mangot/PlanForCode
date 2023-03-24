@@ -44,5 +44,6 @@ dates and changes -
 26/2/23 ->  keep working on chapterAdapter and finish it so you can finish working on the "addToDashboard" and the work on DashboardActivity;
 27/2/23 ->  keep working with the "PlanForCode"
 13/3/23 ->  the currChapters and status are automatically 0 and "Reading" :::: Keep working on the Front problem on CreateMangaActivity + Manga and link the Front to Storage
-15/3/23 ->  finished the Front work + Started working on the data Reading on the Dashboard for the recyclerView for each User(+ the new manga that wass added from MangaActivity[addToDahboard])
+15/3/23 ->  finished the Front work + Started working on the data Reading on the Dashboard for the recyclerView for each User(+ the new manga that was added from MangaActivity[addToDahboard])
             keep working on the data reading + make the order of the chapters in MangaActivity upsidedown(check for bugs on the reading);
+24/3/23 ->  finished working on "AddToDashbooard" ::: keep working on thedata reading with thr manga and mangaactivity from firebase and look for problems.

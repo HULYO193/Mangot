@@ -6,6 +6,8 @@ public class Manga {
     int chapters;
     boolean hasMangaFront;
 
+    public Manga() {
+    }
 
     public Manga(String name) {
         this.name = name;
