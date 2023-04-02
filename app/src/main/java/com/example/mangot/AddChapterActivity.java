@@ -1,5 +1,6 @@
 package com.example.mangot;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -13,14 +14,20 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.firestore.FieldValue;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
+import com.google.firebase.storage.UploadTask;
 
 import java.util.ArrayList;
 
 public class AddChapterActivity extends AppCompatActivity {
 //FirebaseDataStorage changed into AddChapterActivity(as well the xml to addchapter)
+private FirebaseAuth mAuth =  FirebaseAuth.getInstance();
 
 
     // 1. pass the manga name via intent - check
@@ -40,6 +47,8 @@ public class AddChapterActivity extends AppCompatActivity {
     private String mangaName;
 
 
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -54,7 +63,7 @@ public class AddChapterActivity extends AppCompatActivity {
         b.setClickable(false);
 
         editTextTitle = findViewById(R.id.edit_text_title);
-       db.collection("collectionName").document("hello");
+
     }
 
     //uplaoding the pictures of the chapter(any number>0) to storage and going back to MangaActivity
@@ -71,7 +80,7 @@ public class AddChapterActivity extends AppCompatActivity {
         // upload the uri to firebase storage
 
         // for testing only!!!
-        mangaName = "test_manga";//
+        //
         //the loop is the main factor of the activity-> uploading the pictures of the chapter
         for (int i=0;i<uriArr.size();i++) {
             Uri u = uriArr.get(i);
@@ -82,16 +91,30 @@ public class AddChapterActivity extends AppCompatActivity {
                 String pathName = mangaName + "/" + title +"/" + filename;
                 // upload to storage
                 StorageReference chapterReference = storageRef.child(pathName);
-                chapterReference.putFile(u);
+                if(i==uriArr.size()-1)
+                chapterReference.putFile(u).addOnCompleteListener(new OnCompleteListener<UploadTask.TaskSnapshot>() {
+                    @Override
+                    public void onComplete(@NonNull Task<UploadTask.TaskSnapshot> task) {
+
+                        db.collection("MangaStatus").document(mAuth.getCurrentUser().getEmail()).collection("userMangas").document(mangaName).update("maxChapters", FieldValue.increment(1));
+                        db.collection("mangot").document(mangaName).update("chapters", FieldValue.increment(1));
+                        //after the loop is done we can go back to the last page
+                        Intent backtomanga = new Intent(AddChapterActivity.this,MangaActivity.class);
+                        backtomanga.putExtra("chapter",title);
+                        startActivity(backtomanga);
+
+
+                    }
+                });
+                else
+                    chapterReference.putFile(u);
+
+
 
                 // storage/manganame/title
             }
 
         }
-        //after the loop is done we can go back to the last page
-        Intent backtomanga = new Intent(AddChapterActivity.this,MangaActivity.class);
-        backtomanga.putExtra("chapter",title);
-        startActivity(backtomanga);
 
     }
 

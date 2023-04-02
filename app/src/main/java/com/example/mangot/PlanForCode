@@ -47,3 +47,5 @@ dates and changes -
 15/3/23 ->  finished the Front work + Started working on the data Reading on the Dashboard for the recyclerView for each User(+ the new manga that was added from MangaActivity[addToDahboard])
             keep working on the data reading + make the order of the chapters in MangaActivity upsidedown(check for bugs on the reading);
 24/3/23 ->  finished working on "AddToDashbooard" ::: keep working on thedata reading with thr manga and mangaactivity from firebase and look for problems.
+2/4/23 ->   Worked on the recyclerview on both the chapters(MangaActivity) and mangas(Dashboard) , made the names in the recyclerView in Dashboard clickable, uploaded the data of each manga on the MangaActivity after clicking on the name
+            + updated the chapters number after each new chapter(AddChapterActivity) ::::: there is a problem with the imgv on MangaActivity, its not uploading it.... keep working on it and find problems on the way.

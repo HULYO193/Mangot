@@ -14,6 +14,12 @@ public class Manga {
         chapters = 0;
         this.hasMangaFront = false;
     }
+    public Manga(Manga m)
+    {
+        name = m.getName();
+        chapters = m.getChapters();
+        hasMangaFront = m.isHasMangaFront();
+    }
 
     public int getChapters() {
         return chapters;

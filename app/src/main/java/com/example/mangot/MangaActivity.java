@@ -6,13 +6,18 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.media.Image;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.DocumentReference;
@@ -33,24 +38,64 @@ public class MangaActivity extends AppCompatActivity {
         setContentView(R.layout.activity_managa);
 
         ImageView imgv = findViewById(R.id.imageView2);
-
-        ArrayList<Chapter> chapters = new ArrayList<>();
-//        int chapter = getIntent().getIntExtra("chapter",chapters.size() + 1);
-//        Chapter chap = new Chapter(chapter);
-//        chapters.add(chap);
-        chapters.add(new Chapter(1));
-        chapters.add(new Chapter(2));
-        chapters.add(new Chapter(3));
-        chapters.add(new Chapter(4));
-        chapters.add(new Chapter(5));
-
-        RecyclerView recyclerChapter = findViewById(R.id.recyclerchapters);
-        RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(this);
-        recyclerChapter.setLayoutManager(layoutManager);
+        String dbname = getIntent().getStringExtra("mangaName");
 
 
-        ChapterAdapter chapterAdapter = new ChapterAdapter(chapters);
-        recyclerChapter.setAdapter(chapterAdapter);
+
+
+        db.collection("mangot").document(dbname).get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+            @Override
+            public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                if(task.isSuccessful())
+                {
+                    Manga m = task.getResult().toObject(Manga.class);
+                    TextView mangaName = findViewById(R.id.mangaName);
+                    String manga_name = m.getName();
+                    mangaName.setText(manga_name);
+                    if(m.hasMangaFront)
+                    {
+                        StorageReference pathReference= storage.getReference().child(""+m.getName() + "/Front/MangaFront.jpeg");
+                        final long ONE_MEGABYTE = 1024 * 1024;
+                        pathReference.getBytes(ONE_MEGABYTE).addOnSuccessListener(new OnSuccessListener<byte[]>() {
+                            @Override
+                            public void onSuccess(byte[] bytes) {
+                                // Data for "images/island.jpg" is returns, use this as needed
+                                Bitmap bmp = BitmapFactory.decodeByteArray(bytes, 0, bytes.length);
+                                imgv.setImageBitmap(bmp);
+                            }
+                        }).addOnFailureListener(new OnFailureListener() {
+                            @Override
+                            public void onFailure(@NonNull Exception exception) {
+                                // Handle any errors
+                            }
+                        });
+                    }
+                    ArrayList<Chapter> chapters = new ArrayList<>();
+                    for (int i = 1; i <= m.getChapters(); i++) {
+                        Chapter c = new Chapter(i);
+                        chapters.add(c);
+
+                    }
+                    RecyclerView recyclerChapter = findViewById(R.id.recyclerchapters);
+                    RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(MangaActivity.this);
+                    recyclerChapter.setLayoutManager(layoutManager);
+
+
+                    ChapterAdapter chapterAdapter = new ChapterAdapter(chapters);
+                    recyclerChapter.setAdapter(chapterAdapter);
+
+
+
+
+                }
+                else
+                {
+                    Toast.makeText(MangaActivity.this,"failed " + task.getException(),Toast.LENGTH_LONG).show();
+                }
+
+            }
+        });
+
 
 
 
@@ -73,7 +118,7 @@ public class MangaActivity extends AppCompatActivity {
 
         TextView mangaName = findViewById(R.id.mangaName);
         RecyclerView recyclerChapter = findViewById(R.id.recyclerchapters);
-        String manga_name = "what you doing";//mangaName.getText().toString();
+        String manga_name =mangaName.getText().toString();
         //MangaStatus ms = new MangaStatus(manga_name,);
 
 

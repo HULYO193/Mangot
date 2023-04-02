@@ -1,6 +1,7 @@
 package com.example.mangot;
 
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,6 +13,8 @@ import androidx.fragment.app.FragmentManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
+
+import dalvik.system.InMemoryDexClassLoader;
 
 public class MangaAdapter extends RecyclerView.Adapter<MangaAdapter.MangaViewHolder> implements DashboardDialog.DashboardDialogListener {
     private ArrayList<MangaStatus> usersmangas;
@@ -34,6 +37,8 @@ public class MangaAdapter extends RecyclerView.Adapter<MangaAdapter.MangaViewHol
 
         MangaStatus currMangaStatus = usersmangas.get(position);
         holder.mangaTextView.setText(currMangaStatus.getMangaName());
+
+
         holder.statusTextView.setText(currMangaStatus.getStatus());
         holder.currChapterTextView.setText("chapter "+currMangaStatus.getCurrChapter());
         holder.maxChaptersTextView.setText("chapter "+currMangaStatus.getMaxChapters());
@@ -46,6 +51,21 @@ public class MangaAdapter extends RecyclerView.Adapter<MangaAdapter.MangaViewHol
 
                 // show dialog:
                 openDialog(currMangaStatus.getMangaName(),currMangaStatus.getStatus(),currMangaStatus.getCurrChapter());
+
+            }
+        });
+
+        holder.mangaTextView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                // clicked manga name
+                //  pass:
+                //  manga name
+                // move to manga activity
+                Intent i = new Intent((DashboardActivity)c,MangaActivity.class);
+                i.putExtra("mangaName",currMangaStatus.getMangaName());
+                ((DashboardActivity)c).startActivity(i);
+
 
             }
         });
