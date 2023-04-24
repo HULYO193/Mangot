@@ -56,7 +56,7 @@ public class MangaActivity extends AppCompatActivity {
                     if(m.hasMangaFront)
                     {
                         StorageReference pathReference= storage.getReference().child(""+manga_name + "/Front/MangaFront");
-                        final long ONE_MEGABYTE = 4*1024 * 1024;
+                        final long ONE_MEGABYTE = 1024 * 1024;
                         pathReference.getBytes(ONE_MEGABYTE).addOnSuccessListener(new OnSuccessListener<byte[]>() {
                             @Override
                             public void onSuccess(byte[] bytes) {

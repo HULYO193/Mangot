@@ -45,4 +45,6 @@ public class Manga {
         this.hasMangaFront = hasMangaFront;
     }
 
+
+
 }

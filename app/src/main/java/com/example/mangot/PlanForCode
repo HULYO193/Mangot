@@ -49,3 +49,4 @@ dates and changes -
 24/3/23 ->  finished working on "AddToDashbooard" ::: keep working on thedata reading with thr manga and mangaactivity from firebase and look for problems.
 2/4/23 ->   Worked on the recyclerview on both the chapters(MangaActivity) and mangas(Dashboard) , made the names in the recyclerView in Dashboard clickable, uploaded the data of each manga on the MangaActivity after clicking on the name
             + updated the chapters number after each new chapter(AddChapterActivity) ::::: there is a problem with the imgv on MangaActivity, its not uploading it.... keep working on it and find problems on the way.
+24/4/23 ->  Worked on discovery and its adapter :::::: Keep workin on discovery(onclick that will get you to the mangaactivity) and the ratio of the recycletview
