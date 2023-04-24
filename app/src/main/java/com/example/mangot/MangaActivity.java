@@ -10,6 +10,7 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.media.Image;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -54,8 +55,8 @@ public class MangaActivity extends AppCompatActivity {
                     mangaName.setText(manga_name);
                     if(m.hasMangaFront)
                     {
-                        StorageReference pathReference= storage.getReference().child(""+m.getName() + "/Front/MangaFront.jpeg");
-                        final long ONE_MEGABYTE = 1024 * 1024;
+                        StorageReference pathReference= storage.getReference().child(""+manga_name + "/Front/MangaFront");
+                        final long ONE_MEGABYTE = 4*1024 * 1024;
                         pathReference.getBytes(ONE_MEGABYTE).addOnSuccessListener(new OnSuccessListener<byte[]>() {
                             @Override
                             public void onSuccess(byte[] bytes) {
@@ -67,6 +68,7 @@ public class MangaActivity extends AppCompatActivity {
                             @Override
                             public void onFailure(@NonNull Exception exception) {
                                 // Handle any errors
+                                Log.d("manga upload", "onFailure: " + exception.getMessage());
                             }
                         });
                     }
