@@ -51,7 +51,7 @@ public class DiscoveryAdapter extends RecyclerView.Adapter<DiscoveryAdapter.Disc
         }
         else
         {
-            Bitmap b = BitmapFactory.decodeResource(c.getResources(),R.drawable.thumb);
+            Bitmap b = BitmapFactory.decodeResource(c.getResources(),R.drawable.loadingdungeonodyssey);
             holder.imgv.setImageBitmap(b);
         }
         holder.imgv.setOnClickListener(new View.OnClickListener() {

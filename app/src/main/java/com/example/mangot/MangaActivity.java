@@ -1,5 +1,8 @@
 package com.example.mangot;
 
+import androidx.activity.result.ActivityResultCallback;
+import androidx.activity.result.ActivityResultLauncher;
+import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -9,6 +12,7 @@ import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.media.Image;
+import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -33,6 +37,23 @@ public class MangaActivity extends AppCompatActivity {
     FirebaseFirestore db = FirebaseFirestore.getInstance();
     FirebaseStorage storage = FirebaseStorage.getInstance();
     private FirebaseAuth mAuth =  FirebaseAuth.getInstance();
+    private ArrayList<Uri> uriArr = new ArrayList<>();
+
+    ActivityResultLauncher<String> mGetContent = registerForActivityResult(new ActivityResultContracts.GetContent(), new ActivityResultCallback<Uri>() {
+        @Override
+        public void onActivityResult(Uri result) {
+            // Checking whether data is null or not
+            if (result != null) {
+                //  Log.d("fileUri: ", String.valueOf(uri));
+                uriArr.add(result);
+            } else {
+                Toast.makeText(MangaActivity.this, "Failed, please select a single file", Toast.LENGTH_SHORT).show();
+            }
+
+        }
+
+
+    });
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -74,7 +95,7 @@ public class MangaActivity extends AppCompatActivity {
                     }
                     else
                     {
-                        Bitmap b = BitmapFactory.decodeResource(getResources(),R.drawable.thumb);
+                        Bitmap b = BitmapFactory.decodeResource(getResources(), R.drawable.loadingdungeonodyssey);
                         imgv.setImageBitmap(b);
 
                     }
@@ -104,11 +125,23 @@ public class MangaActivity extends AppCompatActivity {
             }
         });
 
+        imgv.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
 
+                mGetContent.launch("image/*");
+            }
+        });
 
 
     }
 
+
+    public void uploadMangaFront(View view) {
+
+
+
+    }
     public void addChapters(View view) {
         TextView mangaName = findViewById(R.id.mangaName);
 
@@ -157,4 +190,5 @@ public class MangaActivity extends AppCompatActivity {
 
 
     }
+
 }

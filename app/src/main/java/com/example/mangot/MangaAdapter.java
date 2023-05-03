@@ -104,4 +104,8 @@ public class MangaAdapter extends RecyclerView.Adapter<MangaAdapter.MangaViewHol
     public void applyText(String username, String password) {
         //will show on the dialog the context
     }
+
+
+
+
 }

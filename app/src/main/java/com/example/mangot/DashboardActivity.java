@@ -11,6 +11,8 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.sax.StartElementListener;
 import android.view.View;
+import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -88,13 +90,18 @@ public class DashboardActivity extends AppCompatActivity implements DashboardDia
 
     }
 
-
+    /*
     public void gotomangapage(View view)
     {
 
         Intent nextpage = new Intent(this,MangaActivity.class);
         startActivity(nextpage);
     }
+    */
+
+
+
+
 
     @Override
     public void applyText(String username, String password) {
