@@ -65,8 +65,6 @@ public class MangaAdapter extends RecyclerView.Adapter<MangaAdapter.MangaViewHol
                 Intent i = new Intent((DashboardActivity)c,MangaActivity.class);
                 i.putExtra("mangaName",currMangaStatus.getMangaName());
                 ((DashboardActivity)c).startActivity(i);
-
-
             }
         });
 

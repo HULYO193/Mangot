@@ -2,6 +2,8 @@ package com.example.mangot;
 
 import static androidx.constraintlayout.helper.widget.MotionEffect.TAG;
 
+import android.content.Context;
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.util.Log;
@@ -24,9 +26,12 @@ import java.util.ArrayList;
 
 public class DiscoveryAdapter extends RecyclerView.Adapter<DiscoveryAdapter.DiscoveryViewHolder> {
     private ArrayList<Manga> discoverymanga;
+    private Context c;
 
-    public DiscoveryAdapter(ArrayList<Manga> discoverymanga) {
+
+    public DiscoveryAdapter(ArrayList<Manga> discoverymanga,Context c) {
         this.discoverymanga = discoverymanga;
+        this.c = c;
     }
 
     @NonNull
@@ -42,6 +47,14 @@ public class DiscoveryAdapter extends RecyclerView.Adapter<DiscoveryAdapter.Disc
         Manga currManga = discoverymanga.get(position);
         holder.nameTextView.setText(currManga.getName());
         downloadImageFromStorage(holder.imgv,currManga);
+        holder.imgv.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent((Discovery)c,MangaActivity.class);
+                intent.putExtra("mangaName",currManga.getName());
+                ((Discovery)c).startActivity(intent);
+            }
+        });
 
 
 

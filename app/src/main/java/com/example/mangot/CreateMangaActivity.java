@@ -1,5 +1,8 @@
 package com.example.mangot;
 
+import androidx.activity.result.ActivityResultCallback;
+import androidx.activity.result.ActivityResultLauncher;
+import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
@@ -37,12 +40,27 @@ public class CreateMangaActivity extends AppCompatActivity {
 
     private ArrayList<Uri> uriArr = new ArrayList<>();
 
+    ActivityResultLauncher<String> mGetContent = registerForActivityResult(new ActivityResultContracts.GetContent(), new ActivityResultCallback<Uri>() {
+        @Override
+        public void onActivityResult(Uri result) {
+            // Checking whether data is null or not
+            if (result != null) {
+                  //  Log.d("fileUri: ", String.valueOf(uri));
+                    uriArr.add(result);
+                }else{
+                    Toast.makeText(CreateMangaActivity.this, "Failed, please select a single file", Toast.LENGTH_SHORT).show();
+                }
+                Button b = findViewById(R.id.createManga);
+                b.setClickable(true);
+            }
+        }
+
+    );
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_create_manga);
-
-
 
     }
     //Creates the new Manga and add it to FireBase
@@ -50,9 +68,6 @@ public class CreateMangaActivity extends AppCompatActivity {
     {
         EditText manga_name = findViewById(R.id.etMangaName);
         String mangas_name = manga_name.getText().toString();
-
-
-
 
         // check if such a manga exists
 
@@ -131,49 +146,10 @@ public class CreateMangaActivity extends AppCompatActivity {
         });
     }
 
-
     public void uploadMangaFront(View view) {
-        Intent filesIntent;
-        filesIntent = new Intent(Intent.ACTION_GET_CONTENT);
-        //filesIntent.putExtra(Intent.EXTRA_ALLOW_MULTIPLE, true);
-        filesIntent.addCategory(Intent.CATEGORY_OPENABLE);
-        filesIntent.setType("image/*");  //use image/* for photos, etc.
-        startActivityForResult(filesIntent, REQUEST_CODE_FOR_ON_ACTIVITY_RESULT);
+
+        mGetContent.launch("image/*");
+
     }
 
-    @Override
-    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-
-        Toast.makeText(this, "files returned",Toast.LENGTH_SHORT).show();
-
-        if (resultCode == RESULT_OK) {
-            switch (requestCode) {
-                case REQUEST_CODE_FOR_ON_ACTIVITY_RESULT:
-
-                    // Checking whether data is null or not
-                    if (data != null) {
-
-                        // Checking for selection multiple files or single.
-                        if (data.getClipData() == null){
-                            // Getting the URI of the selected file and logging into logcat at debug level
-                            Uri uri = data.getData();
-                            Log.d("fileUri: ", String.valueOf(uri));
-                            uriArr.add(uri);
-
-
-                        }else{
-
-                            Toast.makeText(this, "Failed, please select a single file", Toast.LENGTH_SHORT).show();
-
-                        }
-                        Button b = findViewById(R.id.createManga);
-                        b.setClickable(true);
-                    }
-                    break;
-            }
-        }
-        else
-            Toast.makeText(this, "Failed", Toast.LENGTH_SHORT).show();
-    }
 }
