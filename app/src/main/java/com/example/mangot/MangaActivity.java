@@ -72,6 +72,12 @@ public class MangaActivity extends AppCompatActivity {
                             }
                         });
                     }
+                    else
+                    {
+                        Bitmap b = BitmapFactory.decodeResource(getResources(),R.drawable.thumb);
+                        imgv.setImageBitmap(b);
+
+                    }
                     ArrayList<Chapter> chapters = new ArrayList<>();
                     for (int i = 1; i <= m.getChapters(); i++) {
                         Chapter c = new Chapter(i);

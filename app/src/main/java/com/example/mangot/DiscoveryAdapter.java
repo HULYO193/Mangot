@@ -46,7 +46,14 @@ public class DiscoveryAdapter extends RecyclerView.Adapter<DiscoveryAdapter.Disc
     public void onBindViewHolder(@NonNull DiscoveryViewHolder holder, int position) {
         Manga currManga = discoverymanga.get(position);
         holder.nameTextView.setText(currManga.getName());
-        downloadImageFromStorage(holder.imgv,currManga);
+        if(currManga.hasMangaFront) {
+            downloadImageFromStorage(holder.imgv, currManga);
+        }
+        else
+        {
+            Bitmap b = BitmapFactory.decodeResource(c.getResources(),R.drawable.thumb);
+            holder.imgv.setImageBitmap(b);
+        }
         holder.imgv.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
