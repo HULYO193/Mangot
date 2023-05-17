@@ -110,7 +110,7 @@ public class MangaActivity extends AppCompatActivity {
                     recyclerChapter.setLayoutManager(layoutManager);
 
 
-                    ChapterAdapter chapterAdapter = new ChapterAdapter(chapters);
+                    ChapterAdapter chapterAdapter = new ChapterAdapter(chapters,MangaActivity.this);
                     recyclerChapter.setAdapter(chapterAdapter);
 
 
@@ -140,6 +140,17 @@ public class MangaActivity extends AppCompatActivity {
     public void uploadMangaFront(View view) {
 
 
+
+    }
+    public void ToReader(String mangas_name,Chapter currentChapter){
+        Intent toReader = new Intent(this,Reader.class);
+        toReader.putExtra("mangaPathname",mangas_name);
+        toReader.putExtra("chapterNum",currentChapter.getChapternum());
+        startActivity(toReader);
+    }
+
+    public void getName(Chapter chapter)
+    {
 
     }
     public void addChapters(View view) {

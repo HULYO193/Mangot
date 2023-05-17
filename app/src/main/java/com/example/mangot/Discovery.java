@@ -15,7 +15,7 @@ import com.google.firebase.firestore.QuerySnapshot;
 
 import java.util.ArrayList;
 
-public class Discovery extends AppCompatActivity {
+public class Discovery extends BaseActivity {
     FirebaseFirestore db = FirebaseFirestore.getInstance();
     private ArrayList<Manga> discoveryManga = new ArrayList<>();
 

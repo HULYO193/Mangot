@@ -4,6 +4,8 @@ import androidx.recyclerview.widget.RecyclerView;
 import  androidx.annotation.NonNull;
 import java.util.ArrayList;
 
+import android.app.Activity;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,9 +13,14 @@ import android.widget.TextView;
 
 public class ChapterAdapter extends RecyclerView.Adapter<ChapterAdapter.ChaptersViewHolder> {
     ArrayList<Chapter> chapters;
-
-    public ChapterAdapter(ArrayList<Chapter> chapters) {
+    private Activity activity;
+    private String mangas_name;
+    public ChapterAdapter(ArrayList<Chapter> chapters,Activity activity) {
         this.chapters = chapters;
+        this.activity = activity;
+         TextView nameTV = activity.findViewById(R.id.textViewmanga);
+         mangas_name = nameTV.toString();
+
     }
 
     @NonNull
@@ -27,6 +34,13 @@ public class ChapterAdapter extends RecyclerView.Adapter<ChapterAdapter.Chapters
     public void onBindViewHolder(@NonNull ChaptersViewHolder holder, int position) {
         Chapter currentChapter = chapters.get(position);
         holder.chapterTextView.setText("chapter " + currentChapter.getChapternum());
+
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                ((MangaActivity)activity).ToReader(mangas_name,currentChapter);
+            }
+        });
 
     }
 

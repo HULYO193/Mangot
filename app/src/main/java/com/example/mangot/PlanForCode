@@ -53,3 +53,4 @@ dates and changes -
 3/5/23 ->   Finished working on the discovery :::: create a operation in MangaActivity to change the Front if the Manga doesn't have one
             + start working on the Reader, an Activity with recyclerView that will upload the chapters images for the user to read and the things around it
 3/5/23 ->   Worked on the operation in the MangaActivity about the Front problem ::::: work on the reader from now
+17/5/23 -> Worked on the recycler for the Reader ::: keep working on that and staet working on the search engine in dicovery
