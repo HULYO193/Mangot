@@ -81,7 +81,7 @@ public class Reader extends AppCompatActivity {
 
                         recyclerreader.setAdapter(adapter);
 
-
+///
                     }
                 })
                 .addOnFailureListener(new OnFailureListener() {
