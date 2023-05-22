@@ -38,6 +38,7 @@ public class MangaActivity extends AppCompatActivity {
     FirebaseStorage storage = FirebaseStorage.getInstance();
     private FirebaseAuth mAuth =  FirebaseAuth.getInstance();
     private ArrayList<Uri> uriArr = new ArrayList<>();
+    ArrayList<Chapter> chapters = new ArrayList<>();
 
     ActivityResultLauncher<String> mGetContent = registerForActivityResult(new ActivityResultContracts.GetContent(), new ActivityResultCallback<Uri>() {
         @Override
@@ -60,7 +61,8 @@ public class MangaActivity extends AppCompatActivity {
         setContentView(R.layout.activity_managa);
 
         ImageView imgv = findViewById(R.id.imageView2);
-        String dbname = getIntent().getStringExtra("mangaName");
+        //String dbname = getIntent().getStringExtra("mangaName");
+        String dbname = "what you doing";
 
 
 
@@ -99,7 +101,7 @@ public class MangaActivity extends AppCompatActivity {
                         imgv.setImageBitmap(b);
 
                     }
-                    ArrayList<Chapter> chapters = new ArrayList<>();
+                    //ArrayList<Chapter> chapters = new ArrayList<>();
                     for (int i = 1; i <= m.getChapters(); i++) {
                         Chapter c = new Chapter(i);
                         chapters.add(c);
@@ -110,7 +112,7 @@ public class MangaActivity extends AppCompatActivity {
                     recyclerChapter.setLayoutManager(layoutManager);
 
 
-                    ChapterAdapter chapterAdapter = new ChapterAdapter(chapters,MangaActivity.this);
+                    ChapterAdapter chapterAdapter = new ChapterAdapter(chapters,MangaActivity.this,m.getName());
                     recyclerChapter.setAdapter(chapterAdapter);
 
 
@@ -160,6 +162,7 @@ public class MangaActivity extends AppCompatActivity {
 
         Intent mangaintent = new Intent(this, AddChapterActivity.class);
         mangaintent.putExtra("MangaName",manga_name);
+        mangaintent.putExtra("maxchaps",chapters.size());
         startActivity(mangaintent);
     }
 
@@ -169,7 +172,7 @@ public class MangaActivity extends AppCompatActivity {
         //when we are in the DashboardActivity we will add the data as to the usersmangas(Arraylist<MangaStatus>)
 
         TextView mangaName = findViewById(R.id.mangaName);
-        RecyclerView recyclerChapter = findViewById(R.id.recyclerchapters);
+        //  RecyclerView recyclerChapter = findViewById(R.id.recyclerchapters);
         String manga_name =mangaName.getText().toString();
         //MangaStatus ms = new MangaStatus(manga_name,);
 

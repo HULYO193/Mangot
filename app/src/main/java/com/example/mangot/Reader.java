@@ -20,7 +20,7 @@ import java.sql.Array;
 import java.util.ArrayList;
 
 public class Reader extends AppCompatActivity {
-    private ArrayList<StorageReference> Readerchapter;
+    private ArrayList<StorageReference> Readerchapter=new ArrayList<>();
     FirebaseStorage storage = FirebaseStorage.getInstance();
     StorageReference storageRef = storage.getReference();
 
@@ -44,8 +44,8 @@ public class Reader extends AppCompatActivity {
     }
 
     private void getChapterImagesFromFirebase(String nameofmanga, String chapterNum) {
-
-        StorageReference listRef = storage.getReference().child(nameofmanga + "/chapter"+chapterNum+"/");
+        String refString = nameofmanga + "/Chapter " +chapterNum + "/";
+        StorageReference listRef = storage.getReference().child(refString);
 
         listRef.listAll()
                 .addOnSuccessListener(new OnSuccessListener<ListResult>() {

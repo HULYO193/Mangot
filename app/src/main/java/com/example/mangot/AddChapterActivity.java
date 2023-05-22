@@ -26,6 +26,8 @@ import com.google.firebase.storage.UploadTask;
 
 import java.util.ArrayList;
 
+import io.opencensus.metrics.export.Value;
+
 public class AddChapterActivity extends AppCompatActivity {
 //FirebaseDataStorage changed into AddChapterActivity(as well the xml to addchapter)
 private FirebaseAuth mAuth =  FirebaseAuth.getInstance();
@@ -46,6 +48,7 @@ private FirebaseAuth mAuth =  FirebaseAuth.getInstance();
     EditText editTextTitle;
     EditText editTextDescription;
     private String mangaName;
+    TextView chaptertitle;
 
 
 
@@ -62,14 +65,16 @@ private FirebaseAuth mAuth =  FirebaseAuth.getInstance();
         Button b = findViewById(R.id.button);
 
         b.setClickable(false);
+        int maxChaps = getIntent().getIntExtra("maxchaps",0) + 1;
 
-        editTextTitle = findViewById(R.id.edit_text_title);
+        chaptertitle = findViewById(R.id.chapterTitle);
+        chaptertitle.setText("Chapter "+ maxChaps);
 
     }
 
     //uplaoding the pictures of the chapter(any number>0) to storage and going back to MangaActivity
     public void SaveNote(View view) {
-        String title = editTextTitle.getText().toString();
+        String title = chaptertitle.getText().toString();
 
         FirebaseStorage storage = FirebaseStorage.getInstance();
 

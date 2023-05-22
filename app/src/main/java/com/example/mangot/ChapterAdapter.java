@@ -15,11 +15,11 @@ public class ChapterAdapter extends RecyclerView.Adapter<ChapterAdapter.Chapters
     ArrayList<Chapter> chapters;
     private Activity activity;
     private String mangas_name;
-    public ChapterAdapter(ArrayList<Chapter> chapters,Activity activity) {
+    public ChapterAdapter(ArrayList<Chapter> chapters,Activity activity,String nameTV) {
         this.chapters = chapters;
         this.activity = activity;
-         TextView nameTV = activity.findViewById(R.id.textViewmanga);
-         mangas_name = nameTV.toString();
+         //TextView nameTV = activity.findViewById(R.id.textViewmanga);
+         mangas_name = nameTV;
 
     }
 

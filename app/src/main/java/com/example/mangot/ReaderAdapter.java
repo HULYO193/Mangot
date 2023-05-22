@@ -6,6 +6,7 @@ import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
@@ -33,7 +34,8 @@ public class ReaderAdapter extends RecyclerView.Adapter<ReaderAdapter.ReaderView
     @NonNull
     @Override
     public ReaderViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        return null;
+        View chapimageview = LayoutInflater.from(parent.getContext()).inflate(R.layout.chapter_info_reader,parent,false);
+        return new ReaderViewHolder(chapimageview);
     }
 
     @Override

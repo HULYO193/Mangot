@@ -90,14 +90,14 @@ public class DashboardActivity extends AppCompatActivity implements DashboardDia
 
     }
 
-    /*
+
     public void gotomangapage(View view)
     {
 
         Intent nextpage = new Intent(this,MangaActivity.class);
         startActivity(nextpage);
     }
-    */
+
 
 
 
