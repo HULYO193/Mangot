@@ -47,7 +47,9 @@ public class Login extends AppCompatActivity {
                         if (task.isSuccessful()) {
                             // Sign in success, update UI with the signed-in user's information
                             Toast.makeText(Login.this,"WELCOME",Toast.LENGTH_LONG).show();
-                            FirebaseUser user = mAuth.getCurrentUser();
+                            //FirebaseUser user = mAuth.getCurrentUser();
+                            Intent npage = new Intent(Login.this,DashboardActivity.class);
+                            startActivity(npage);
 
                         } else {
                             // If sign in fails, display a message to the user.
@@ -58,5 +60,11 @@ public class Login extends AppCompatActivity {
                         }
                     }
                 });
+    }
+
+    public void ToRegister(View view) {
+        Intent registerpage = new Intent(this,Register.class);
+        startActivity(registerpage);
+
     }
 }
