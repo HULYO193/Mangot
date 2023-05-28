@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
@@ -31,41 +32,31 @@ public class Login extends AppCompatActivity {
             startActivity(npage);
 
         }
-
     }
-    //
-    public void onclicklogin(View view)
-    {
-        EditText nemail = findViewById(R.id.editTextTextEmailAddress);
-        EditText npassword = findViewById(R.id.editTextTextPassword);
-        EditText confirmpassword = findViewById(R.id.editTextTextConfirmationPassword);
-        String password = npassword.getText().toString();
-        String passConfirm = confirmpassword.getText().toString();
 
-        if(password.equals(passConfirm))
-        {
-            String email = nemail.getText().toString();
+    public void onclicklogin(View view) {
+        EditText loginemail = findViewById(R.id.loginemail);
+        EditText logingpass = findViewById(R.id.loginpassword);
 
-            mAuth.createUserWithEmailAndPassword(email, password)
-                    .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
-                        @Override
-                        public void onComplete(@NonNull Task< AuthResult> task) {
-                            if (task.isSuccessful()) {
-                                // Sign in success, update UI with the signed-in user's information
-                                   db.collection("MangaStatus").document(""+email).collection("userMangas").add(new MangaStatus());
-                                Intent npage = new Intent(Login.this,DashboardActivity.class);
-                                startActivity(npage);
-                                // move to user activity
-                                //Intent npage = new Intent(this,MainActivity.class);
+        String mail = loginemail.getText().toString();
+        String pass = logingpass.getText().toString();
+        mAuth.signInWithEmailAndPassword(mail, pass)
+                .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
+                    @Override
+                    public void onComplete(@NonNull Task<AuthResult> task) {
+                        if (task.isSuccessful()) {
+                            // Sign in success, update UI with the signed-in user's information
+                            Toast.makeText(Login.this,"WELCOME",Toast.LENGTH_LONG).show();
+                            FirebaseUser user = mAuth.getCurrentUser();
 
-                            } else {
-                                // If sign in fails, display a message to the user.
-                                Toast.makeText(Login.this,"failed " + task.getException(),Toast.LENGTH_LONG).show();
-                            }
+                        } else {
+                            // If sign in fails, display a message to the user.
+
+                            Toast.makeText(Login.this, "Authentication failed.",
+                                    Toast.LENGTH_SHORT).show();
+
                         }
-                    });
-
-        }
-
+                    }
+                });
     }
 }
