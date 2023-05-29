@@ -31,6 +31,7 @@ public class DashboardDialog extends AppCompatDialogFragment  {
     private String mStatus;
     private int mChapters;
 
+
     private static final ArrayList<String> statusChoicesArr = new ArrayList<>();
     FirebaseFirestore db = FirebaseFirestore.getInstance();
     private FirebaseAuth mAuth =  FirebaseAuth.getInstance();
@@ -90,14 +91,8 @@ public class DashboardDialog extends AppCompatDialogFragment  {
             @Override
             public void onNothingSelected(AdapterView<?> adapterView) {
                 mStatus = statusChoicesArr.get(0);
-
-
             }
-
-
         });
-
-
 
         return builder.create();
     }

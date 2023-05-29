@@ -33,8 +33,8 @@ public class DashboardActivity extends AppCompatActivity implements DashboardDia
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_dashboard);
-        int maxChapters = getIntent().getIntExtra("max_chapters",0);
-        String manganame = getIntent().getStringExtra("manga_name");
+       // int maxChapters = getIntent().getIntExtra("max_chapters",0);
+       // String manganame = getIntent().getStringExtra("manga_name");
 
         getDataFromFirebase();
     }

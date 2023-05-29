@@ -6,6 +6,7 @@ import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.os.Bundle;
+import android.widget.SearchView;
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -18,6 +19,8 @@ import java.util.ArrayList;
 public class Discovery extends BaseActivity {
     FirebaseFirestore db = FirebaseFirestore.getInstance();
     private ArrayList<Manga> discoveryManga = new ArrayList<>();
+    //RecyclerView recyclerdiscovery = findViewById(R.id.discoveryrecycler);
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,8 +44,55 @@ public class Discovery extends BaseActivity {
                 }
                 Toast.makeText(Discovery.this, "hello", Toast.LENGTH_SHORT).show();
             }
+
         });
 
+        showSearchResult();
+    }
 
+        public void showSearchResult(){
+            SearchView searchView = findViewById(R.id.discoverysearch);
+            // below line is to call set on query text listener method.
+            searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String query) {
+                return false;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String newText) {
+                // inside on query text change method we are
+                // calling a method to filter our recycler view.
+                filter(newText);
+                return false;
+            }
+        });
+
+    }
+
+    private void filter(String text) {
+        // creating a new array list to filter our data.
+        ArrayList<Manga> filteredlist = new ArrayList<Manga>();
+
+        // running a for loop to compare elements.
+        for (Manga item : discoveryManga) {
+            // checking if the entered string matched with any item of our recycler view.
+            if (item.getName().toLowerCase().contains(text.toLowerCase())) {
+                // if the item is matched we are
+                // adding it to our filtered list.
+                filteredlist.add(item);
+            }
+        }
+        if (filteredlist.isEmpty()) {
+            // if no item is added in filtered list we are
+            // displaying a toast message as no data found.
+            Toast.makeText(this, "No Data Found..", Toast.LENGTH_SHORT).show();
+        } else {
+            // at last we are passing that filtered
+            // list to our adapter class.
+            RecyclerView recyclerdiscovery = findViewById(R.id.discoveryrecycler);
+            DiscoveryAdapter discoveryadapter = new DiscoveryAdapter(filteredlist,Discovery.this);
+            recyclerdiscovery.setAdapter(discoveryadapter);
+        }
     }
 }

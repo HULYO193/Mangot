@@ -61,3 +61,5 @@ dates and changes -
 17/5/23 ->  Worked on the recycler for the Reader ::: keep working on that and staet working on the search engine in dicovery
 22/5/23 ->  Found problems with the Reader and adapters , fixed most of them. Did some changes in the class(see in github) :::: work on search engine in Discovery and register + Login.
 28/5/23 ->  Finished working on Login as an Activity ::: look for problems and start working on the search engine in Discovery + work on the dialog in DashboardActivity.
+29/5/23 ->  finished working on the Search engine and fixed a few problems on the way
+            ::: finish working on the dialog (delete button + chapters read button/spinner) and work on the menu fragment.

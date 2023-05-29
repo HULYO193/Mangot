@@ -61,8 +61,8 @@ public class MangaActivity extends AppCompatActivity {
         setContentView(R.layout.activity_managa);
 
         ImageView imgv = findViewById(R.id.imageView2);
-        //String dbname = getIntent().getStringExtra("mangaName");
-        String dbname = "what you doing";
+        String dbname = getIntent().getStringExtra("mangaName");
+
 
 
 

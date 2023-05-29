@@ -12,6 +12,9 @@ import androidx.annotation.NonNull;
 import androidx.fragment.app.FragmentManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.firestore.FirebaseFirestore;
+
 import java.util.ArrayList;
 
 import dalvik.system.InMemoryDexClassLoader;
@@ -19,6 +22,8 @@ import dalvik.system.InMemoryDexClassLoader;
 public class MangaAdapter extends RecyclerView.Adapter<MangaAdapter.MangaViewHolder> implements DashboardDialog.DashboardDialogListener {
     private ArrayList<MangaStatus> usersmangas;
     private Context c;
+    private FirebaseAuth mAuth =  FirebaseAuth.getInstance();
+    FirebaseFirestore db = FirebaseFirestore.getInstance();
 
     public MangaAdapter(ArrayList<MangaStatus> usersmangas,Context c) {
         this.usersmangas = usersmangas;
@@ -67,6 +72,17 @@ public class MangaAdapter extends RecyclerView.Adapter<MangaAdapter.MangaViewHol
                 ((DashboardActivity)c).startActivity(i);
             }
         });
+        // problem - do A delete button in dialog instead of longclick.
+        holder.optionsButton.setOnLongClickListener(new View.OnLongClickListener() {
+            @Override
+            public boolean onLongClick(View view) {
+                db.collection("MangaStatus")
+                        .document(""+ mAuth.getCurrentUser().getEmail())
+                        .collection("userMangas")
+                        .document(""+currMangaStatus.getMangaName()).delete();
+                return false;
+            }
+        });
 
 
     }
@@ -74,6 +90,8 @@ public class MangaAdapter extends RecyclerView.Adapter<MangaAdapter.MangaViewHol
         DashboardDialog dashboardDialog = new DashboardDialog(mName,mStatus,mChapters);
         dashboardDialog.show(((DashboardActivity)this.c).getSupportFragmentManager(),"dialog of dashboard");
     }
+
+
 
 
 
