@@ -55,7 +55,7 @@ public class MangaAdapter extends RecyclerView.Adapter<MangaAdapter.MangaViewHol
                 // 3 - current chapter
 
                 // show dialog:
-                openDialog(currMangaStatus.getMangaName(),currMangaStatus.getStatus(),currMangaStatus.getCurrChapter());
+                openDialog(currMangaStatus.getMangaName(),currMangaStatus.getStatus(),currMangaStatus.getCurrChapter(),usersmangas);
 
             }
         });
@@ -73,7 +73,7 @@ public class MangaAdapter extends RecyclerView.Adapter<MangaAdapter.MangaViewHol
             }
         });
         // problem - do A delete button in dialog instead of longclick.
-        holder.optionsButton.setOnLongClickListener(new View.OnLongClickListener() {
+      /*  holder.optionsButton.setOnLongClickListener(new View.OnLongClickListener() {
             @Override
             public boolean onLongClick(View view) {
                 db.collection("MangaStatus")
@@ -82,12 +82,12 @@ public class MangaAdapter extends RecyclerView.Adapter<MangaAdapter.MangaViewHol
                         .document(""+currMangaStatus.getMangaName()).delete();
                 return false;
             }
-        });
+        });*/
 
 
     }
-    public void openDialog(String mName,String mStatus,int mChapters) {
-        DashboardDialog dashboardDialog = new DashboardDialog(mName,mStatus,mChapters);
+    public void openDialog(String mName,String mStatus,int mChapters,ArrayList<MangaStatus> usermanga) {
+        DashboardDialog dashboardDialog = new DashboardDialog(mName,mStatus,mChapters, usermanga);
         dashboardDialog.show(((DashboardActivity)this.c).getSupportFragmentManager(),"dialog of dashboard");
     }
 

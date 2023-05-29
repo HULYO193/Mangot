@@ -30,16 +30,18 @@ public class DashboardDialog extends AppCompatDialogFragment  {
     private String mName;
     private String mStatus;
     private int mChapters;
+    private ArrayList<MangaStatus> usermangas;
 
 
     private static final ArrayList<String> statusChoicesArr = new ArrayList<>();
     FirebaseFirestore db = FirebaseFirestore.getInstance();
     private FirebaseAuth mAuth =  FirebaseAuth.getInstance();
 
-    public DashboardDialog(String mName,String mStatus,int mChapters){
+    public DashboardDialog(String mName, String mStatus, int mChapters, ArrayList<MangaStatus> usermanga){
         this.mName = mName;
         this.mStatus = mStatus;
         this.mChapters = mChapters;
+        this.usermangas = usermanga;
     }
     @NonNull
     @Override
@@ -93,6 +95,20 @@ public class DashboardDialog extends AppCompatDialogFragment  {
                 mStatus = statusChoicesArr.get(0);
             }
         });
+        //still not working after putting it in dialog , maybe need to update the array of the adapter for it to work
+        button = (Button) view.findViewById(R.id.deletebutton);
+        button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                db.collection("MangaStatus")
+                        .document(""+ mAuth.getCurrentUser().getEmail())
+                        .collection("userMangas")
+                        .document(""+mName).delete();
+                usermangas = deleteselectedManga(usermangas,mName);
+
+
+            }
+        });
 
         return builder.create();
     }
@@ -110,5 +126,14 @@ public class DashboardDialog extends AppCompatDialogFragment  {
 
     public interface  DashboardDialogListener{
         void applyText(String username, String password);
+    }
+    public ArrayList<MangaStatus> deleteselectedManga(ArrayList<MangaStatus> mangaStatuses,String mNAME)
+    {
+        ArrayList<MangaStatus> tmp = mangaStatuses ;
+        for (int i = 0; i < tmp.size(); i++) {
+            if(tmp.get(i).getMangaName() == mNAME)
+                tmp.remove(i);
+        }
+        return tmp;
     }
 }
