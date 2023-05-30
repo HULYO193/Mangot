@@ -58,4 +58,17 @@
         app:layout_constraintEnd_toStartOf="@+id/mangapage"
         app:layout_constraintTop_toTopOf="parent" />
 
+    <Button
+        android:id="@+id/toDiscovery"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="11dp"
+        android:layout_marginTop="4dp"
+        android:layout_marginEnd="8dp"
+        android:text="Button"
+        android:onClick="toDiscovetypage"
+        app:layout_constraintEnd_toStartOf="@+id/mangapage"
+        app:layout_constraintStart_toEndOf="@+id/createmanga"
+        app:layout_constraintTop_toTopOf="parent" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

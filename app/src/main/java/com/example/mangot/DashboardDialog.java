@@ -4,6 +4,7 @@ import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -17,6 +18,8 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatDialogFragment;
 
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.FirebaseFirestore;
 
@@ -32,16 +35,17 @@ public class DashboardDialog extends AppCompatDialogFragment  {
     private int mChapters;
     private ArrayList<MangaStatus> usermangas;
 
-
+    private Context c;
     private static final ArrayList<String> statusChoicesArr = new ArrayList<>();
     FirebaseFirestore db = FirebaseFirestore.getInstance();
     private FirebaseAuth mAuth =  FirebaseAuth.getInstance();
 
-    public DashboardDialog(String mName, String mStatus, int mChapters, ArrayList<MangaStatus> usermanga){
+    public DashboardDialog(String mName, String mStatus, int mChapters, ArrayList<MangaStatus> usermanga,Context c){
         this.mName = mName;
         this.mStatus = mStatus;
         this.mChapters = mChapters;
         this.usermangas = usermanga;
+        this.c = c;
     }
     @NonNull
     @Override
@@ -103,8 +107,17 @@ public class DashboardDialog extends AppCompatDialogFragment  {
                 db.collection("MangaStatus")
                         .document(""+ mAuth.getCurrentUser().getEmail())
                         .collection("userMangas")
-                        .document(""+mName).delete();
-                usermangas = deleteselectedManga(usermangas,mName);
+                        .document(""+mName).delete().addOnCompleteListener(new OnCompleteListener<Void>() {
+                            @Override
+                            public void onComplete(@NonNull Task<Void> task) {
+                                if(task.isSuccessful()) {
+                                    usermangas = deleteselectedManga(usermangas, mName);
+                                    MangaAdapter mangaAdapter = new MangaAdapter(usermangas,(DashboardActivity)c);
+                                    mangaAdapter.notifyDataSetChanged();
+                                }
+                            }
+                        });
+
 
 
             }

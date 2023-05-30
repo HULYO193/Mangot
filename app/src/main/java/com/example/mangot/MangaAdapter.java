@@ -15,6 +15,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.FirebaseFirestore;
 
+import java.security.PublicKey;
 import java.util.ArrayList;
 
 import dalvik.system.InMemoryDexClassLoader;
@@ -87,7 +88,7 @@ public class MangaAdapter extends RecyclerView.Adapter<MangaAdapter.MangaViewHol
 
     }
     public void openDialog(String mName,String mStatus,int mChapters,ArrayList<MangaStatus> usermanga) {
-        DashboardDialog dashboardDialog = new DashboardDialog(mName,mStatus,mChapters, usermanga);
+        DashboardDialog dashboardDialog = new DashboardDialog(mName,mStatus,mChapters, usermanga,c);
         dashboardDialog.show(((DashboardActivity)this.c).getSupportFragmentManager(),"dialog of dashboard");
     }
 

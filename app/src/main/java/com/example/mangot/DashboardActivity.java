@@ -112,5 +112,10 @@ public class DashboardActivity extends AppCompatActivity implements DashboardDia
         Intent createManga = new Intent(this,CreateMangaActivity.class);
         startActivity(createManga);
     }
+
+    public void toDiscovetypage(View view) {
+        Intent todiscovery = new Intent(this,Discovery.class);
+        startActivity(todiscovery);
+    }
     //public void UpdateMangaStatus
 }
