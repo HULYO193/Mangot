@@ -5,12 +5,15 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.Intent;
 import android.os.Bundle;
-import android.widget.SearchView;
+import android.view.MenuItem;
+import androidx.appcompat.widget.SearchView;
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
+import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QuerySnapshot;
 
@@ -26,7 +29,36 @@ public class Discovery extends BaseActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_discovery);
+        // Set Home selected
+        // Initialize and assign variable
+        BottomNavigationView bottomNavigationView=findViewById(R.id.bottom_navigation);
 
+        // Set Home selected
+        bottomNavigationView.setSelectedItemId(R.id.dashboard);
+
+        // Perform item selected listener
+        bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
+            @Override
+            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+
+                switch(item.getItemId())
+                {
+                    case R.id.dashboard:
+                        startActivity(new Intent(getApplicationContext(),Discovery.class));
+                        overridePendingTransition(0,0);
+                        return true;
+
+                    case R.id.discovery:
+                        return true;
+
+                    case R.id.createNewManga:
+                        startActivity(new Intent(getApplicationContext(),CreateMangaActivity.class));
+                        overridePendingTransition(0,0);
+                        return true;
+                }
+                return false;
+            }
+        });
 
         db.collection("mangot").get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
             @Override
@@ -48,10 +80,11 @@ public class Discovery extends BaseActivity {
         });
 
         showSearchResult();
+
     }
 
         public void showSearchResult(){
-            SearchView searchView = findViewById(R.id.discoverysearch);
+            SearchView searchView = (SearchView) findViewById(R.id.discoverysearch);
             // below line is to call set on query text listener method.
             searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
