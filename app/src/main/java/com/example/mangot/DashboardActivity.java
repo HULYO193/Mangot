@@ -29,6 +29,8 @@ import java.util.ArrayList;
 public class DashboardActivity extends AppCompatActivity implements DashboardDialog.DashboardDialogListener {
     private FirebaseAuth mAuth =  FirebaseAuth.getInstance();
     FirebaseFirestore db = FirebaseFirestore.getInstance();
+
+    private MangaAdapter mangaAdapter;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -68,7 +70,7 @@ public class DashboardActivity extends AppCompatActivity implements DashboardDia
 
                             recyclerView.setLayoutManager(layoutManager);
 
-                            MangaAdapter mangaAdapter = new MangaAdapter(usersmangas,DashboardActivity.this);
+                             mangaAdapter = new MangaAdapter(usersmangas,DashboardActivity.this);
                             recyclerView.setAdapter(mangaAdapter);
 
                         }
@@ -116,6 +118,11 @@ public class DashboardActivity extends AppCompatActivity implements DashboardDia
     public void toDiscovetypage(View view) {
         Intent todiscovery = new Intent(this,Discovery.class);
         startActivity(todiscovery);
+    }
+
+    public void refreshAdapter() {
+
+        mangaAdapter.notifyDataSetChanged();
     }
     //public void UpdateMangaStatus
 }

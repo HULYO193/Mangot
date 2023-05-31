@@ -4,7 +4,6 @@ import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.Context;
 import android.content.DialogInterface;
-import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -26,7 +25,8 @@ import com.google.firebase.firestore.FirebaseFirestore;
 import java.util.ArrayList;
 
 public class DashboardDialog extends AppCompatDialogFragment  {
-    private Spinner spinner;
+    private Spinner spinnerstatus;
+    private Spinner spinnerchapters;
     private EditText editTextPassword;
     private Button button;
     private DashboardDialogListener listener;
@@ -34,12 +34,14 @@ public class DashboardDialog extends AppCompatDialogFragment  {
     private String mStatus;
     private int mChapters;
     private ArrayList<MangaStatus> usermangas;
-
+    private String baseStatus = "";
     private Context c;
     private static final ArrayList<String> statusChoicesArr = new ArrayList<>();
+    private  static final ArrayList<String> statusChaptersArr = new ArrayList<>();
     FirebaseFirestore db = FirebaseFirestore.getInstance();
     private FirebaseAuth mAuth =  FirebaseAuth.getInstance();
 
+                        // manga name  manga status  maxchapters        all the mangas of the user       DashboardActivity
     public DashboardDialog(String mName, String mStatus, int mChapters, ArrayList<MangaStatus> usermanga,Context c){
         this.mName = mName;
         this.mStatus = mStatus;
@@ -51,6 +53,7 @@ public class DashboardDialog extends AppCompatDialogFragment  {
     @Override
     public Dialog onCreateDialog(@Nullable Bundle savedInstanceState) {
         statusChoicesArr.clear();
+        statusChaptersArr.clear();
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
         LayoutInflater inflater = getActivity().getLayoutInflater();
         View view = inflater.inflate(R.layout.dialog_for_dashboard,null);
@@ -60,6 +63,7 @@ public class DashboardDialog extends AppCompatDialogFragment  {
                 .setNegativeButton("cancel", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
+                        getDialog().dismiss();
 
                     }
                 })
@@ -67,11 +71,13 @@ public class DashboardDialog extends AppCompatDialogFragment  {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
 
+                        getDialog().dismiss();
 
 
                     }
                 });
-        spinner = (Spinner) view.findViewById(R.id.statusSpinner);
+        spinnerstatus = (Spinner) view.findViewById(R.id.statusSpinner);
+        statusChoicesArr.add(baseStatus);
 
         statusChoicesArr.add("Reading");
         statusChoicesArr.add("On Hold");
@@ -79,24 +85,39 @@ public class DashboardDialog extends AppCompatDialogFragment  {
         ArrayAdapter<String> statusAdapter = new ArrayAdapter<String>(getContext(), androidx.appcompat.R.layout.support_simple_spinner_dropdown_item,statusChoicesArr);
         statusAdapter.setDropDownViewResource(androidx.appcompat.R.layout.support_simple_spinner_dropdown_item);
 
-        spinner.setAdapter(statusAdapter);
+        spinnerstatus.setAdapter(statusAdapter);
 
 
-        spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+        spinnerstatus.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
-                mStatus = statusChoicesArr.get(i);
+
+                   String value =statusChoicesArr.get(i);
+                   if(value.equals(baseStatus))
+                       return;
+
+                   mStatus = value;
 
                 db.collection("MangaStatus").document(""+mAuth.getCurrentUser().getEmail())
                         .collection("userMangas")
                         .document(""+mName)
-                        .update("status",mStatus);
+                        .update("status",mStatus).addOnCompleteListener(new OnCompleteListener<Void>() {
+                            @Override
+                            public void onComplete(@NonNull Task<Void> task) {
+                                if(task.isSuccessful())
+                                {
+                                    usermangas = updateselectedMangaStatus(usermangas, mName,mStatus);
+                                    ((DashboardActivity)(DashboardDialog.this.c)).refreshAdapter();
+                                }
+                            }
+                        });
 
             }
 
             @Override
             public void onNothingSelected(AdapterView<?> adapterView) {
-                mStatus = statusChoicesArr.get(0);
+                //mStatus = statusChoicesArr.get(0);
+
             }
         });
         //still not working after putting it in dialog , maybe need to update the array of the adapter for it to work
@@ -112,13 +133,57 @@ public class DashboardDialog extends AppCompatDialogFragment  {
                             public void onComplete(@NonNull Task<Void> task) {
                                 if(task.isSuccessful()) {
                                     usermangas = deleteselectedManga(usermangas, mName);
-                                    MangaAdapter mangaAdapter = new MangaAdapter(usermangas,(DashboardActivity)c);
-                                    mangaAdapter.notifyDataSetChanged();
+                                  //  MangaAdapter mangaAdapter = new MangaAdapter(usermangas,(DashboardActivity)c);
+
+
+                                    ((DashboardActivity)(DashboardDialog.this.c)).refreshAdapter();
+                                    getDialog().dismiss();
+
                                 }
                             }
                         });
 
 
+
+            }
+        });
+            //////
+        spinnerchapters = (Spinner) view.findViewById(R.id.chapterspinner);
+        statusChaptersArr.add(baseStatus);
+        for (int i = 1; i <= mChapters; i++) {
+            statusChaptersArr.add("Chapter "+i);
+        }
+        ArrayAdapter<String> statusAdapterchapters = new ArrayAdapter<String>(getContext(), androidx.appcompat.R.layout.support_simple_spinner_dropdown_item,statusChaptersArr);
+        statusAdapterchapters.setDropDownViewResource(androidx.appcompat.R.layout.support_simple_spinner_dropdown_item);
+        spinnerchapters.setAdapter(statusAdapterchapters);
+        spinnerchapters.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+
+                String value = statusChaptersArr.get(i);
+                if(value.equals(baseStatus))
+                    return;
+                String[] res = value.split(" ");
+
+                int chap = Integer.valueOf(res[1]);
+
+                db.collection("MangaStatus").document(""+mAuth.getCurrentUser().getEmail())
+                        .collection("userMangas")
+                        .document(""+mName)
+                        .update("currChapter",chap).addOnCompleteListener(new OnCompleteListener<Void>() {
+                            @Override
+                            public void onComplete(@NonNull Task<Void> task) {
+                                if(task.isSuccessful())
+                                {
+                                    usermangas = updateselectedMangaChapter(usermangas, mName,chap);
+                                    ((DashboardActivity)(DashboardDialog.this.c)).refreshAdapter();
+                                }
+                            }
+                        });
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> adapterView) {
 
             }
         });
@@ -148,5 +213,23 @@ public class DashboardDialog extends AppCompatDialogFragment  {
                 tmp.remove(i);
         }
         return tmp;
+    }
+    public ArrayList<MangaStatus> updateselectedMangaStatus(ArrayList<MangaStatus> mangaStatuses, String mNAME, String mstatus){
+        ArrayList<MangaStatus> tmp = mangaStatuses ;
+        for (int i = 0; i < tmp.size(); i++) {
+            if(tmp.get(i).getMangaName() == mNAME)
+                tmp.get(i).setStatus(mstatus);
+        }
+        return tmp;
+
+    }
+    public ArrayList<MangaStatus> updateselectedMangaChapter(ArrayList<MangaStatus> mangaStatuses, String mNAME, int chapt){
+        ArrayList<MangaStatus> tmp = mangaStatuses ;
+        for (int i = 0; i < tmp.size(); i++) {
+            if(tmp.get(i).getMangaName() == mNAME)
+                tmp.get(i).setCurrChapter(chapt);
+        }
+        return tmp;
+
     }
 }

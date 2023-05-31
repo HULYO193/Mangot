@@ -56,7 +56,7 @@ public class MangaAdapter extends RecyclerView.Adapter<MangaAdapter.MangaViewHol
                 // 3 - current chapter
 
                 // show dialog:
-                openDialog(currMangaStatus.getMangaName(),currMangaStatus.getStatus(),currMangaStatus.getCurrChapter(),usersmangas);
+                openDialog(currMangaStatus.getMangaName(),currMangaStatus.getStatus(),currMangaStatus.getMaxChapters(),usersmangas);
 
             }
         });
