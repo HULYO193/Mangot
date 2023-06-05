@@ -11,65 +11,27 @@
         android:layout_width="409dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="1dp"
-        android:layout_marginTop="45dp"
+        android:layout_marginTop="130dp"
         android:layout_marginEnd="1dp"
-        android:layout_marginBottom="109dp"
+        android:layout_marginBottom="55dp"
         android:minHeight="48dp"
         app:layout_constraintBottom_toTopOf="@+id/Dashboard"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/mangapage" />
+        app:layout_constraintTop_toTopOf="parent" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/Dashboard"
-        android:layout_width="412dp"
-        android:layout_height="356dp"
-        android:layout_marginTop="87dp"
+        android:layout_width="409dp"
+        android:layout_height="459dp"
         android:layout_marginBottom="88dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/status_spinner" />
 
-    <Button
-        android:id="@+id/mangapage"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="241dp"
-        android:layout_marginTop="44dp"
-        android:layout_marginEnd="76dp"
-        android:onClick="gotomangapage"
-        android:text="Button"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <Button
-        android:id="@+id/createmanga"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="41dp"
-        android:layout_marginEnd="80dp"
-        android:layout_marginBottom="1dp"
-        android:text="Button"
-        android:onClick="CreateManga"
-        app:layout_constraintBottom_toTopOf="@+id/status_spinner"
-        app:layout_constraintEnd_toStartOf="@+id/mangapage"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <Button
-        android:id="@+id/toDiscovery"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="11dp"
-        android:layout_marginTop="4dp"
-        android:layout_marginEnd="8dp"
-        android:text="Button"
-        android:onClick="toDiscovetypage"
-        app:layout_constraintEnd_toStartOf="@+id/mangapage"
-        app:layout_constraintStart_toEndOf="@+id/createmanga"
-        app:layout_constraintTop_toTopOf="parent" />
     <com.google.android.material.bottomnavigation.BottomNavigationView
         android:id="@+id/bottom_navigation"
         android:layout_width="match_parent"

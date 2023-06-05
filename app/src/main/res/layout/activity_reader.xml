@@ -8,11 +8,48 @@
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/readerRecycler"
-        android:layout_width="407dp"
-        android:layout_height="687dp"
+        android:layout_width="412dp"
+        android:layout_height="674dp"
         android:layout_marginStart="1dp"
         android:layout_marginEnd="1dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+        android:id="@+id/prevChap"
+        android:layout_width="179dp"
+        android:layout_height="48dp"
+        android:layout_marginTop="3dp"
+        android:onClick="PrevChapter"
+        android:text="Previous Chapter"
+        android:textSize="12sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/readerRecycler" />
+
+    <Button
+        android:id="@+id/nextChap"
+        android:layout_width="169dp"
+        android:layout_height="48dp"
+        android:layout_marginTop="3dp"
+        android:onClick="NextChapter"
+        android:text="Next Chapter"
+        android:textSize="12sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/readerRecycler" />
+
+    <Spinner
+        android:id="@+id/chaptersReader"
+        android:layout_width="54dp"
+        android:layout_height="48dp"
+        android:layout_marginStart="4dp"
+        android:layout_marginTop="3dp"
+        android:layout_marginEnd="4dp"
+        android:layout_marginBottom="7dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/nextChap"
+        app:layout_constraintStart_toEndOf="@+id/prevChap"
+        app:layout_constraintTop_toBottomOf="@+id/readerRecycler" />
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -63,5 +63,8 @@ dates and changes -
 28/5/23 ->  Finished working on Login as an Activity ::: look for problems and start working on the search engine in Discovery + work on the dialog in DashboardActivity.
 29/5/23 ->  finished working on the Search engine and fixed a few problems on the way
             ::: finish working on the dialog (delete button + chapters read button/spinner) and work on the menu fragment.
-31/5/23 -> finushed workinh on the dialog (delete + chapters, spinner) :::: open a branch in github to work on the fragment and when youre done , copy the code to the project.
+31/5/23 -> finished working on the dialog (delete + chapters, spinner) :::: open a branch in github to work on the fragment and when youre done , copy the code to the project.
 31/5/23 -> finished te navigation bar :::: start working on the book report and style
+5/6/23 ->  finished working on the last things with the buttons and spinner in Reader
+           and changed every activity that uses WiFi Receiver to BaseActivity
+           ::: start working on the book report and style and work on problem you find on the way

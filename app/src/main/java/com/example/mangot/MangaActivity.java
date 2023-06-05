@@ -33,7 +33,7 @@ import com.google.firebase.storage.StorageReference;
 
 import java.util.ArrayList;
 
-public class MangaActivity extends AppCompatActivity {
+public class MangaActivity extends BaseActivity {
     FirebaseFirestore db = FirebaseFirestore.getInstance();
     FirebaseStorage storage = FirebaseStorage.getInstance();
     private FirebaseAuth mAuth =  FirebaseAuth.getInstance();

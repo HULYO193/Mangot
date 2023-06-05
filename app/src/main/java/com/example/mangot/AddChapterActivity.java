@@ -28,7 +28,7 @@ import java.util.ArrayList;
 
 import io.opencensus.metrics.export.Value;
 
-public class AddChapterActivity extends AppCompatActivity {
+public class AddChapterActivity extends BaseActivity {
 //FirebaseDataStorage changed into AddChapterActivity(as well the xml to addchapter)
 private FirebaseAuth mAuth =  FirebaseAuth.getInstance();
 

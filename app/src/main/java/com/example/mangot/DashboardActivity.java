@@ -28,7 +28,7 @@ import com.google.firebase.firestore.QuerySnapshot;
 
 import java.util.ArrayList;
 
-public class DashboardActivity extends AppCompatActivity implements DashboardDialog.DashboardDialogListener {
+public class DashboardActivity extends BaseActivity implements DashboardDialog.DashboardDialogListener {
     private FirebaseAuth mAuth =  FirebaseAuth.getInstance();
     FirebaseFirestore db = FirebaseFirestore.getInstance();
 
@@ -122,38 +122,13 @@ public class DashboardActivity extends AppCompatActivity implements DashboardDia
         });
 
     }
-
-
-    public void gotomangapage(View view)
-    {
-
-        Intent nextpage = new Intent(this,MangaActivity.class);
-        startActivity(nextpage);
-    }
-
-
-
-
-
-
     @Override
     public void applyText(String username, String password) {
         Toast.makeText(this,"clicked",Toast.LENGTH_LONG).show();
-    }
-
-    public void CreateManga(View view) {
-        Intent createManga = new Intent(this,CreateMangaActivity.class);
-        startActivity(createManga);
-    }
-
-    public void toDiscovetypage(View view) {
-        Intent todiscovery = new Intent(this,Discovery.class);
-        startActivity(todiscovery);
     }
 
     public void refreshAdapter() {
 
         mangaAdapter.notifyDataSetChanged();
     }
-    //public void UpdateMangaStatus
 }

@@ -33,7 +33,7 @@ import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.util.ArrayList;
 
-public class CreateMangaActivity extends AppCompatActivity {
+public class CreateMangaActivity extends BaseActivity {
     private static final int REQUEST_CODE_FOR_ON_ACTIVITY_RESULT =1;
     FirebaseFirestore db = FirebaseFirestore.getInstance();
     FirebaseStorage storage = FirebaseStorage.getInstance();

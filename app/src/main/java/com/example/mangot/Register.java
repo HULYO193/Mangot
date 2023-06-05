@@ -16,7 +16,7 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.FirebaseFirestore;
 
-public class Register extends AppCompatActivity {
+public class Register extends BaseActivity {
     private FirebaseAuth mAuth =  FirebaseAuth.getInstance();
     FirebaseFirestore db = FirebaseFirestore.getInstance();
     @Override

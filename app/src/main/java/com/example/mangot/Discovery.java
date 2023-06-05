@@ -34,7 +34,7 @@ public class Discovery extends BaseActivity {
         BottomNavigationView bottomNavigationView=findViewById(R.id.bottom_navigation);
 
         // Set Home selected
-        bottomNavigationView.setSelectedItemId(R.id.dashboard);
+        bottomNavigationView.setSelectedItemId(R.id.discovery);
 
         // Perform item selected listener
         bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
@@ -44,7 +44,7 @@ public class Discovery extends BaseActivity {
                 switch(item.getItemId())
                 {
                     case R.id.dashboard:
-                        startActivity(new Intent(getApplicationContext(),Discovery.class));
+                        startActivity(new Intent(getApplicationContext(),DashboardActivity.class));
                         overridePendingTransition(0,0);
                         return true;
 
