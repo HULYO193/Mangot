@@ -131,4 +131,10 @@ public class DashboardActivity extends BaseActivity implements DashboardDialog.D
 
         mangaAdapter.notifyDataSetChanged();
     }
+
+    public void LogOut(View view) {
+        mAuth.signOut();
+        Intent singout = new Intent(this,Login.class);
+        startActivity(singout);
+    }
 }

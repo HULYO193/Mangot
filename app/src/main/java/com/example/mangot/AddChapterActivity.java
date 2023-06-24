@@ -102,29 +102,38 @@ private FirebaseAuth mAuth =  FirebaseAuth.getInstance();
                     @Override
                     public void onComplete(@NonNull Task<UploadTask.TaskSnapshot> task) {
 
-                        db.collection("MangaStatus").document(mAuth.getCurrentUser().getEmail()).collection("userMangas").document(mangaName).update("maxChapters", FieldValue.increment(1));
-                        db.collection("mangot").document(mangaName).update("chapters", FieldValue.increment(1));
-                        //after the loop is done we can go back to the last page
-                        Intent backtomanga = new Intent(AddChapterActivity.this,MangaActivity.class);
-                        backtomanga.putExtra("chapter",title);
-                        startActivity(backtomanga);
+                        db.collection("MangaStatus")
+                                .document(mAuth.getCurrentUser().getEmail())
+                                .collection("userMangas").document(mangaName)
+                                .update("maxChapters", FieldValue.increment(1))
+                                .addOnCompleteListener(new OnCompleteListener<Void>() {
+                                    @Override
+                                    public void onComplete(@NonNull Task<Void> task) {
+                                        db.collection("mangot")
+                                                .document(mangaName)
+                                                .update("chapters", FieldValue.increment(1))
+                                                .addOnCompleteListener(new OnCompleteListener<Void>() {
 
+                                                    @Override
+                                                    public void onComplete(@NonNull Task<Void> task) {
+                                                        Intent backtomanga = new Intent(AddChapterActivity.this,MangaActivity.class);
+                                                        backtomanga.putExtra("chapter",title);
+                                                        startActivity(backtomanga);
+                                                    }
+                                                });
+                                    }
+                                });
 
                     }
                 });
                 else
                     chapterReference.putFile(u);
 
-
-
-                // storage/manganame/title
             }
 
         }
 
     }
-
-
 
 
     public void UploadChapters(View view) {
@@ -135,9 +144,7 @@ private FirebaseAuth mAuth =  FirebaseAuth.getInstance();
         filesIntent.setType("image/*");  //use image/* for photos, etc.
         startActivityForResult(filesIntent, REQUEST_CODE_FOR_ON_ACTIVITY_RESULT);
 
-
     }
-
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {

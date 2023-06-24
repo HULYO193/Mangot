@@ -7,6 +7,8 @@ import android.net.NetworkInfo;
 import android.os.Bundle;
 import android.widget.Toast;
 
+import java.util.Timer;
+
 public class WiFiReceiver extends BroadcastReceiver {
 
     @Override
@@ -27,6 +29,7 @@ public class WiFiReceiver extends BroadcastReceiver {
 
         } else {
             Toast.makeText(context, "Internet connection is Off", Toast.LENGTH_LONG).show();
+
         }
 
 

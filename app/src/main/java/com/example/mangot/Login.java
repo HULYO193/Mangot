@@ -26,6 +26,7 @@ public class Login extends BaseActivity {
         setContentView(R.layout.activity_login);
 
         FirebaseUser fbUser = mAuth.getCurrentUser();
+
         if(fbUser!=null)
         {
             Intent npage = new Intent(this,DashboardActivity.class);

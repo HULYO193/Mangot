@@ -92,47 +92,49 @@ public class CreateMangaActivity extends BaseActivity {
             }
 
             //Creates the new Manga and add it to FireBase
-            public void CreateManga(View view) {
-                EditText manga_name = findViewById(R.id.etMangaName);
-                String mangas_name = manga_name.getText().toString();
+        });
+    }
+    public void CreateManga(View view) {
+        EditText manga_name = findViewById(R.id.etMangaName);
+        String mangas_name = manga_name.getText().toString();
 
-                // check if such a manga exists
+        // check if such a manga exists
 
-                db.collection("mangot").whereEqualTo("name", mangas_name).limit(1).get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
-                    @Override
-                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
-                        if (task.isSuccessful()) {
-                            // check if we have data
-                            if (task.getResult().size() == 1) {
-                                // problem...
-                                Toast.makeText(CreateMangaActivity.this, "EXISTS ", Toast.LENGTH_LONG).show();
+        db.collection("mangot").whereEqualTo("name", mangas_name).limit(1).get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+            @Override
+            public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                if (task.isSuccessful()) {
+                    // check if we have data
+                    if (task.getResult().size() == 1) {
+                        // problem...
+                        Toast.makeText(CreateMangaActivity.this, "EXISTS ", Toast.LENGTH_LONG).show();
 
-                            } else // no such exists
-                            {
-                                boolean isPic = false;
+                    } else // no such exists
+                    {
+                        boolean isPic = false;
 
-                                if (uriArr.size() > 0) // if a file is chosen
-                                {
-                                    Uri u = uriArr.get(0);
-                                    isPic = true;
+                        if (uriArr.size() > 0) // if a file is chosen
+                        {
+                            Uri u = uriArr.get(0);
+                            isPic = true;
 
-                                    try {
-                                        // read the uri into image
-                                        // comrpess the image and store as jpeg
-                                        ByteArrayOutputStream stream = new ByteArrayOutputStream();
-                                        Bitmap bitmap = MediaStore.Images.Media.getBitmap(CreateMangaActivity.this.getContentResolver(), u);
-                                        bitmap.compress(Bitmap.CompressFormat.JPEG, 50, stream);
-                                        byte[] byteArray = stream.toByteArray();
-                                        String filename = "MangaFront";
-                                        String title = "Front";
-                                        String pathName = mangas_name + "/" + title + "/" + filename;
-                                        // upload to storage
-                                        StorageReference frontReference = storageRef.child(pathName);
-                                        frontReference.putBytes(byteArray);
+                            try {
+                                // read the uri into image
+                                // comrpess the image and store as jpeg
+                                ByteArrayOutputStream stream = new ByteArrayOutputStream();
+                                Bitmap bitmap = MediaStore.Images.Media.getBitmap(CreateMangaActivity.this.getContentResolver(), u);
+                                bitmap.compress(Bitmap.CompressFormat.JPEG, 50, stream);
+                                byte[] byteArray = stream.toByteArray();
+                                String filename = "MangaFront";
+                                String title = "Front";
+                                String pathName = mangas_name + "/" + title + "/" + filename;
+                                // upload to storage
+                                StorageReference frontReference = storageRef.child(pathName);
+                                frontReference.putBytes(byteArray);
 
-                                    } catch (IOException e) {
-                                        e.printStackTrace();
-                                    }
+                            } catch (IOException e) {
+                                e.printStackTrace();
+                            }
 
 
 /*
@@ -144,41 +146,38 @@ public class CreateMangaActivity extends BaseActivity {
                             frontReference.putFile(u);
 
  */
+                        }
+
+
+                        Manga manga = new Manga(mangas_name);
+                        manga.setHasMangaFront(isPic);
+
+
+                        db.collection("mangot").document("" + mangas_name).set(manga).addOnCompleteListener(new OnCompleteListener<Void>() {
+                            @Override
+                            public void onComplete(@NonNull Task<Void> task) {
+                                // if success -> go to Dashboard page
+                                // else -> problem ->
+                                if (task.isSuccessful()) {
+                                    Intent gotodashboard = new Intent(CreateMangaActivity.this, DashboardActivity.class);
+                                    startActivity(gotodashboard);
+                                } else {
+                                    Toast.makeText(CreateMangaActivity.this, "failed " + task.getException(), Toast.LENGTH_LONG).show();
                                 }
 
-
-                                Manga manga = new Manga(mangas_name);
-                                manga.setHasMangaFront(isPic);
-
-
-                                db.collection("mangot").document("" + mangas_name).set(manga).addOnCompleteListener(new OnCompleteListener<Void>() {
-                                    @Override
-                                    public void onComplete(@NonNull Task<Void> task) {
-                                        // if success -> go to Dashboard page
-                                        // else -> problem ->
-                                        if (task.isSuccessful()) {
-                                            Intent gotodashboard = new Intent(CreateMangaActivity.this, DashboardActivity.class);
-                                            startActivity(gotodashboard);
-                                        } else {
-                                            Toast.makeText(CreateMangaActivity.this, "failed " + task.getException(), Toast.LENGTH_LONG).show();
-                                        }
-
-                                    }
-                                });
-
-
                             }
-                        }
+                        });
+
+
                     }
-                });
+                }
             }
-
-            public void uploadMangaFront(View view) {
-
-                mGetContent.launch("image/*");
-
-            }
-
         });
+    }
+
+    public void uploadMangaFront(View view) {
+
+        mGetContent.launch("image/*");
+
     }
 }
