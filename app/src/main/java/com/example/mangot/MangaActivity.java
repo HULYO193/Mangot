@@ -14,6 +14,7 @@ import android.graphics.BitmapFactory;
 import android.media.Image;
 import android.net.Uri;
 import android.os.Bundle;
+import android.provider.MediaStore;
 import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
@@ -28,18 +29,23 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.QuerySnapshot;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 
+import java.io.ByteArrayOutputStream;
+import java.io.IOException;
 import java.util.ArrayList;
 
 public class MangaActivity extends BaseActivity {
     FirebaseFirestore db = FirebaseFirestore.getInstance();
     FirebaseStorage storage = FirebaseStorage.getInstance();
+    StorageReference storageRef = storage.getReference();
     private FirebaseAuth mAuth =  FirebaseAuth.getInstance();
     private ArrayList<Uri> uriArr = new ArrayList<>();
     ArrayList<Chapter> chapters = new ArrayList<>();
-
+    private String mangas_name;
+    boolean isPic;
     ActivityResultLauncher<String> mGetContent = registerForActivityResult(new ActivityResultContracts.GetContent(), new ActivityResultCallback<Uri>() {
         @Override
         public void onActivityResult(Uri result) {
@@ -47,13 +53,67 @@ public class MangaActivity extends BaseActivity {
             if (result != null) {
                 //  Log.d("fileUri: ", String.valueOf(uri));
                 uriArr.add(result);
-            } else {
-                Toast.makeText(MangaActivity.this, "Failed, please select a single file", Toast.LENGTH_SHORT).show();
+                db.collection("mangot").whereEqualTo("name", mangas_name).limit(1).get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                    @Override
+                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
+
+                        isPic = false;
+
+
+                        if (uriArr.size() > 0) // if a file is chosen
+                        {
+                            Uri u = uriArr.get(0);
+                            isPic = true;
+
+                            try {
+                                // read the uri into image
+                                // comrpess the image and store as jpeg
+                                ByteArrayOutputStream stream = new ByteArrayOutputStream();
+                                Bitmap bitmap = MediaStore.Images.Media.getBitmap(MangaActivity.this.getContentResolver(), u);
+                                bitmap.compress(Bitmap.CompressFormat.JPEG, 50, stream);
+                                byte[] byteArray = stream.toByteArray();
+                                String filename = "MangaFront";
+                                String title = "Front";
+                                String pathName = mangas_name + "/" + title + "/" + filename;
+                                // upload to storage
+                                StorageReference frontReference = storageRef.child(pathName);
+                                frontReference.putBytes(byteArray);
+
+                            } catch (IOException e) {
+                                e.printStackTrace();
+                            }
+
+                        }
+                        db.collection("mangot").document(mangas_name).get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+                            @Override
+                            public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                                if(task.isSuccessful())
+                                {
+                                    Manga currmanga = task.getResult().toObject(Manga.class);
+                                        currmanga.setHasMangaFront(isPic);
+                                    db.collection("mangot").document("" + mangas_name).set(currmanga).addOnCompleteListener(new OnCompleteListener<Void>() {
+                                        @Override
+                                        public void onComplete(@NonNull Task<Void> task) {
+                                            // if success -> go to Dashboard page
+                                            // else -> problem ->
+                                            if (task.isSuccessful()) {
+                                                Intent gotodashboard = new Intent(MangaActivity.this, DashboardActivity.class);
+                                                startActivity(gotodashboard);
+                                            } else {
+                                                Toast.makeText(MangaActivity.this, "failed " + task.getException(), Toast.LENGTH_LONG).show();
+                                            }
+                                        }
+                                    });
+
+                                }
+                            }
+                        });
+
+
+                    }
+                });
             }
-
         }
-
-
     });
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -62,7 +122,7 @@ public class MangaActivity extends BaseActivity {
 
         ImageView imgv = findViewById(R.id.imageView2);
         String dbname = getIntent().getStringExtra("mangaName");
-
+        mangas_name = dbname;
 
 
 

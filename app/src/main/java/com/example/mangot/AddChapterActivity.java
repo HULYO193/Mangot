@@ -9,6 +9,7 @@ import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -17,6 +18,7 @@ import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
+import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.FieldValue;
 import com.google.firebase.firestore.FirebaseFirestore;
@@ -49,7 +51,7 @@ private FirebaseAuth mAuth =  FirebaseAuth.getInstance();
     EditText editTextDescription;
     private String mangaName;
     TextView chaptertitle;
-
+    private BottomNavigationView bottomNavigationView;
 
 
 
@@ -69,6 +71,38 @@ private FirebaseAuth mAuth =  FirebaseAuth.getInstance();
 
         chaptertitle = findViewById(R.id.chapterTitle);
         chaptertitle.setText("Chapter "+ maxChaps);
+        // Set Home selected
+
+
+
+        // Perform item selected listener
+        bottomNavigationView.setSelectedItemId(0);
+        bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
+            @Override
+            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+
+                switch (item.getItemId()) {
+                    case R.id.dashboard:
+                        startActivity(new Intent(getApplicationContext(), DashboardActivity.class));
+                        overridePendingTransition(0, 0);
+                        return true;
+
+                    case R.id.discovery:
+                        startActivity(new Intent(getApplicationContext(), Discovery.class));
+                        overridePendingTransition(0, 0);
+                        return true;
+
+                    case R.id.createNewManga:
+                        startActivity(new Intent(getApplicationContext(), CreateMangaActivity.class));
+                        overridePendingTransition(0, 0);
+                        return true;
+                }
+                return false;
+
+            }
+
+            //Creates the new Manga and add it to FireBase
+        });
 
     }
 
