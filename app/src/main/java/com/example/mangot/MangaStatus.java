@@ -30,26 +30,20 @@ public class MangaStatus {
     public void setMaxChapters(int maxChapters) {
         this.maxChapters = maxChapters;
     }
-
     public MangaStatus() {
     }
-
     public String getStatus() {
         return status;
     }
-
     public void setStatus(String status) {
         this.status = status;
     }
-
     public int getCurrChapter() {
         return currChapter;
     }
-
     public void setCurrChapter(int currChapter) {
         this.currChapter = currChapter;
     }
-
     public String getMangaName() {
         return mangaName;
     }
@@ -65,6 +59,5 @@ public class MangaStatus {
     public void setUseremail(String useremail) {
         this.useremail = useremail;
     }
-
 
 }

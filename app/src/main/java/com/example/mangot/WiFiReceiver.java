@@ -30,6 +30,7 @@ public class WiFiReceiver extends BroadcastReceiver {
         } else {
             Toast.makeText(context, "Internet connection is Off", Toast.LENGTH_LONG).show();
 
+
         }
 
 

@@ -126,28 +126,24 @@ public class DashboardDialog extends AppCompatDialogFragment  {
             @Override
             public void onClick(View view) {
                 db.collection("MangaStatus")
-                        .document(""+ mAuth.getCurrentUser().getEmail())
+                        .document("" + mAuth.getCurrentUser().getEmail())
                         .collection("userMangas")
-                        .document(""+mName).delete().addOnCompleteListener(new OnCompleteListener<Void>() {
+                        .document("" + mName).delete().addOnCompleteListener(new OnCompleteListener<Void>() {
                             @Override
                             public void onComplete(@NonNull Task<Void> task) {
-                                if(task.isSuccessful()) {
+                                if (task.isSuccessful()) {
                                     usermangas = deleteselectedManga(usermangas, mName);
-                                  //  MangaAdapter mangaAdapter = new MangaAdapter(usermangas,(DashboardActivity)c);
-
-
-                                    ((DashboardActivity)(DashboardDialog.this.c)).refreshAdapter();
+                                    //  MangaAdapter mangaAdapter = new MangaAdapter(usermangas,(DashboardActivity)c);
+                                    ((DashboardActivity) (DashboardDialog.this.c)).refreshAdapter();
                                     getDialog().dismiss();
 
                                 }
                             }
                         });
 
-
-
             }
         });
-            //////
+
         spinnerchapters = (Spinner) view.findViewById(R.id.chapterspinner);
         statusChaptersArr.add(baseStatus);
         for (int i = 1; i <= mChapters; i++) {

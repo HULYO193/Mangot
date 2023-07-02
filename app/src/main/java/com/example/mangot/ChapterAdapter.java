@@ -22,7 +22,6 @@ public class ChapterAdapter extends RecyclerView.Adapter<ChapterAdapter.Chapters
          mangas_name = nameTV;
 
     }
-
     @NonNull
     @Override
     public ChaptersViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
@@ -43,7 +42,6 @@ public class ChapterAdapter extends RecyclerView.Adapter<ChapterAdapter.Chapters
         });
 
     }
-
     @Override
     public int getItemCount() {
         return chapters.size();
@@ -60,7 +58,6 @@ public class ChapterAdapter extends RecyclerView.Adapter<ChapterAdapter.Chapters
         }
 
     }
-
 
 }
 

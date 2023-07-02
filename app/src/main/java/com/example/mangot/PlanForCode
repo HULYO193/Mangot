@@ -68,4 +68,4 @@ dates and changes -
 5/6/23 ->  finished working on the last things with the buttons and spinner in Reader
            and changed every activity that uses WiFi Receiver to BaseActivity
            ::: start working on the book report and style and work on problem you find on the way
-25/6/23 -> did some fixes in the code ::: found a problem at the bottom navigation at AddChapterActivity I want the it to be there  without it showing on the bottom navigation.
+25/6/23 -> did some fixes in the code ::: found a problem at the bottom navigation at AddChapterActivity I want the it to be there without it showing on the bottom navigation.

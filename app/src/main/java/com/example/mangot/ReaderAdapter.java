@@ -24,33 +24,22 @@ import java.util.ArrayList;
 public class ReaderAdapter extends RecyclerView.Adapter<ReaderAdapter.ReaderViewHolder> {
     private ArrayList<StorageReference> readerchapter;
     private Context c;
-
     public ReaderAdapter(ArrayList<StorageReference> readerchapter ,Context c){
         this.readerchapter = readerchapter;
         this.c = c;
-
     }
-
     @NonNull
     @Override
     public ReaderViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View chapimageview = LayoutInflater.from(parent.getContext()).inflate(R.layout.chapter_info_reader,parent,false);
         return new ReaderViewHolder(chapimageview);
     }
-
     @Override
-    public void onBindViewHolder(@NonNull ReaderViewHolder holder, int position) {
-
-        downloadImageFromStorage(holder.chapterIV,this.readerchapter.get(position));
-
-
-    }
-
+    public void onBindViewHolder(@NonNull ReaderViewHolder holder, int position) { downloadImageFromStorage(holder.chapterIV,this.readerchapter.get(position));}
     @Override
     public int getItemCount() {
         return readerchapter.size();
     }
-
 
     public static class ReaderViewHolder extends RecyclerView.ViewHolder{
             public ImageView chapterIV;
@@ -77,7 +66,5 @@ public class ReaderAdapter extends RecyclerView.Adapter<ReaderAdapter.ReaderView
                 Log.d(TAG, "onFailure: problem");
             }
         });
-
     }
-
 }

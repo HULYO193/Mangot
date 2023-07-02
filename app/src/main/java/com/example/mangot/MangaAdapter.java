@@ -43,8 +43,6 @@ public class MangaAdapter extends RecyclerView.Adapter<MangaAdapter.MangaViewHol
 
         MangaStatus currMangaStatus = usersmangas.get(position);
         holder.mangaTextView.setText(currMangaStatus.getMangaName());
-
-
         holder.statusTextView.setText(currMangaStatus.getStatus());
         holder.currChapterTextView.setText("chapter "+currMangaStatus.getCurrChapter());
         holder.maxChaptersTextView.setText("chapter "+currMangaStatus.getMaxChapters());
@@ -54,10 +52,8 @@ public class MangaAdapter extends RecyclerView.Adapter<MangaAdapter.MangaViewHol
                 // 1 - delete- longholdonclick
                 // 2 - change status
                 // 3 - current chapter
-
                 // show dialog:
                 openDialog(currMangaStatus.getMangaName(),currMangaStatus.getStatus(),currMangaStatus.getMaxChapters(),usersmangas);
-
             }
         });
 
@@ -73,28 +69,12 @@ public class MangaAdapter extends RecyclerView.Adapter<MangaAdapter.MangaViewHol
                 ((DashboardActivity)c).startActivity(i);
             }
         });
-        // problem - do A delete button in dialog instead of longclick.
-      /*  holder.optionsButton.setOnLongClickListener(new View.OnLongClickListener() {
-            @Override
-            public boolean onLongClick(View view) {
-                db.collection("MangaStatus")
-                        .document(""+ mAuth.getCurrentUser().getEmail())
-                        .collection("userMangas")
-                        .document(""+currMangaStatus.getMangaName()).delete();
-                return false;
-            }
-        });*/
-
 
     }
     public void openDialog(String mName,String mStatus,int mChapters,ArrayList<MangaStatus> usermanga) {
         DashboardDialog dashboardDialog = new DashboardDialog(mName,mStatus,mChapters, usermanga,c);
         dashboardDialog.show(((DashboardActivity)this.c).getSupportFragmentManager(),"dialog of dashboard");
     }
-
-
-
-
 
     @Override
     public int getItemCount() {
@@ -118,13 +98,8 @@ public class MangaAdapter extends RecyclerView.Adapter<MangaAdapter.MangaViewHol
 
         }
     }
-
     @Override
     public void applyText(String username, String password) {
         //will show on the dialog the context
     }
-
-
-
-
 }
